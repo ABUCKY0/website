@@ -1,0 +1,35 @@
+---
+const pageTitle = "About Me";
+
+const identity = {
+  firstName: "Sarah",
+  country: "Canada",
+  occupation: "Technical Writer",
+  hobbies: ["photography", "birdwatching", "baseball"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <a href="/blog/">Blog</a>
+    <h1>{pageTitle}</h1>
+    <h2>...and my new astro site!</h2>
+    <p>
+      I'm Aaron, a freshman computer science student. This is my first website,
+      started before I enter my freshman year.
+    </p>
+    <p>
+      I'm using Astro to build this site, and I'm excited to learn more about
+      web development!
+    </p>
+  </body>
+</html>
