@@ -41,7 +41,15 @@ import Footer from "../components/Footer.astro";
       </div>
       <div id="notfound">
         <h1 class="errhone">404</h1>
-        <h2 style="color: #aaa;">{Astro.url.pathname} Not Found</h2>
+        <h2 id="notfound-path" style="color: #aaa;">Not Found</h2>
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const el = document.getElementById("notfound-path");
+            if (el) {
+              el.textContent = window.location.pathname + " Not Found";
+            }
+          });
+        </script>
       </div>
     </div>
     <Footer />
