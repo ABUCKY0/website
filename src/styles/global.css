@@ -251,6 +251,8 @@ h1 {
   padding-top: 0rem;
   /* Same as footer height */
 }
+
+
 .blog-post-list {
   display: flex;
   flex-direction: row;

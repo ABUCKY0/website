@@ -43,20 +43,29 @@ for (const path in postImport) {
 if (!post) {
   throw new Error(`Post not found: ${slug}`);
 }
+
+// Fix Astro/TypeScript error for dynamic component rendering
 const PostContent = post!.Content;
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{post!.frontmatter.title}</title>
   </head>
   <body>
     <Navigation currentPath={Astro.url.pathname} />
+    {
+      post!.frontmatter.banner && (
+        <img
+          src={post!.frontmatter.banner}
+          alt={post!.frontmatter.bannerAlt || "Banner image"}
+          class="blog-banner"
+        />
+      )
+    }
     <main class="main-blog-content">
       <article>
-        <h1 class="blog-title">{post!.frontmatter.title}</h1>
         {
           post!.frontmatter.date && (
             <p class="blog-date-container">
@@ -65,19 +74,17 @@ const PostContent = post!.Content;
                   new Date(post!.frontmatter.date).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
-                    day: "numeric",
-                  })}
+                    day: "numeric"
+                  })
+                }
               </em>
             </p>
           )
         }
+        <h1 class="blog-title">{post!.frontmatter.title}</h1>
         {
-          post!.frontmatter.banner && (
-            <img
-              src={post!.frontmatter.banner}
-              alt={post!.frontmatter.bannerAlt || "Banner image"}
-              class="blog-banner"
-            />
+          post!.frontmatter.description && (
+            <p class="blog-description">{post!.frontmatter.description}</p>
           )
         }
         <hr class="blog-title-hr" />

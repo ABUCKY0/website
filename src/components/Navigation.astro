@@ -1,5 +1,4 @@
 ---
-const { currentPath } = Astro.props;
 // import github-mark-white.svg from public/github-mark-white.svg
 import "../styles/global.css";
 import "@fontsource/work-sans";
@@ -8,37 +7,30 @@ import "@fontsource/work-sans/700.css";
 
 <div class="nav">
   <div class="nav-links">
-    <a href="/" class={currentPath === "/" ? "active" : ""}>Home</a>
+    <a href="/" class={Astro.url.pathname === "/" ? "active" : ""}>Home</a>
     <!-- <a href="" class={currentPath === "/about" ? "active" : ""}>About</a> -->
-    <a href="/projects" class={currentPath === "/projects" ? "active" : ""}
-      >Projects</a
+    <a
+      href="/projects"
+      class={Astro.url.pathname === "/projects" ? "active" : ""}>Projects</a
     >
-    <a href="/blog" class={currentPath === "/blog" ? "active" : ""}>Blog</a>
+    <a
+      href="/blog"
+      class={Astro.url.pathname.startsWith("/blog") ||
+      Astro.url.pathname.startsWith("/posts")
+        ? "active"
+        : ""}>Blog</a
+    >
   </div>
 
   <div class="nav-socials">
     <a href="https://discord.com/users/925248483135463454">
-      <img
-        src="/discord.svg"
-        alt="Discord"
-        width="32"
-        height="32"
-      />
+      <img src="/discord.svg" alt="Discord" width="32" height="32" />
     </a>
     <a href="https://twitter.com/@ABUCKY0">
-      <img
-        src="/twitter.svg"
-        alt="Twitter"
-        width="32"
-        height="32"
-      />
-    <a href="https://github.com/ABUCKY0">
-      <img
-        src="/github.svg"
-        alt="GitHub"
-        width="28"
-        height="28"
-      />
+      <img src="/twitter.svg" alt="Twitter" width="32" height="32" />
+      <a href="https://github.com/ABUCKY0">
+        <img src="/github.svg" alt="GitHub" width="28" height="28" />
+      </a>
     </a>
   </div>
 </div>
