@@ -18,4 +18,10 @@ import DiscordCurrentActivities from "./discordCurrentActivities.jsx";
   <Social platform="youtube" username="astrodotbuild" /> -->
   <p class="footer-text">©ABUCKY0 2025</p>
   <!-- <DiscordCurrentActivities client:load /> -->
+  <!-- if domain is localhost, show a Development message -->
+  {
+    Astro.url.hostname === "localhost" && (
+      <p class="footer-text"> Development Version</p>
+    )
+  }
 </footer>
