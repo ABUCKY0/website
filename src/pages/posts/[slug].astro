@@ -69,7 +69,15 @@ const PostContent = post!.Content;
         {
           post!.frontmatter.date && (
             <p class="blog-date-container">
-              <em class="blog-date">{post!.frontmatter.date}</em>
+              <em class="blog-date">
+                {post!.frontmatter.date &&
+                  new Date(post!.frontmatter.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                  })
+                }
+              </em>
             </p>
           )
         }

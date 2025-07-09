@@ -39,6 +39,20 @@ h1 {
   margin: 0;
 }
 
+
+@media screen and (max-width: 700px) {
+  .name {
+    font-size: 2.25rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .disc-name {
+    font-size: 1.5rem;
+  }
+}
 /* ====== Navigation ====== */
 .nav {
   display: flex;
@@ -49,12 +63,15 @@ h1 {
 }
 
 .nav-links {
-  width: 100%;
-  /* padding: 1rem */
+  display: block;
+  position: static;
+  width: auto;
+  background: none;
 }
 
 .nav-links a {
-  display: block;
+  display: inline-block;
+  padding: .2rem .5rem;
   text-align: center;
   text-decoration: none;
   font-size: 1.2rem;
@@ -66,7 +83,6 @@ h1 {
 .nav-links a.active {
   text-decoration: underline;
   text-decoration-thickness: .15em;
-  /* text-underline-offset: 0.2em; */
 }
 
 .nav-links a:hover,
@@ -77,31 +93,38 @@ h1 {
 .expanded {
   display: unset;
 }
-.nav-socials a {
-  /* hide */
-  display: none;
-}
-@media screen and (min-width: 0) {
-  .nav-links {
-    display: block;
-    position: static;
-    width: auto;
-    background: none;
-  }
 
+.nav-socials {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  padding-top: 0.1rem;
+}
+
+.nav-socials a {
+  display: inline-block;
+}
+
+/* ====== Mobile Navigation ====== */
+@media (max-width: 700px) {
   .nav-links a {
     display: inline-block;
     padding: .2rem .5rem;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    height: 3rem;
+    color: #dedede; 
+  }
+
+  .nav {
+    height: 3rem;
+
   }
   .nav-socials {
-    display: flex;
-    gap: 1rem;
-    flex-direction: row;
-    padding-top: 0.1rem;
-  }
-  .nav-socials a {
-    /* hide */
-    display: inline-block;
+    display: none;
   }
 }
 
@@ -235,6 +258,7 @@ h1 {
   margin: 0 auto;
   max-width: 100%;
   text-decoration: none !important;
+  flex-wrap: wrap;;
 }
 
 .blog-li-post {
@@ -255,15 +279,27 @@ h1 {
   position:relative;
 }
 
+@media screen and (max-width: 700px) {
+  .blog-li-post {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0rem;
+    min-height: 40vh;
+  }
+  
+}
 .blog-li-banner {
   width: 100%;
-  height: 33vh;
+  height: auto;
   max-height: 50vh;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
   margin: 0 auto;
   margin-top: 0rem;
   margin-bottom: 0rem;
+  padding: 0rem;
   /* border-radius: 1rem */
   text-decoration: none !important;
   background-color: #fff;
