@@ -1,0 +1,35 @@
+---
+// filepath: c:\Users\buckn\Desktop\GitHub\website\src\pages\404.astro
+import "../styles/global.css";
+import "@fontsource/work-sans";
+import "@fontsource/work-sans/700.css";
+import Navigation from "../components/Navigation.astro";
+---
+
+<html>
+  <head>
+    <title>404: {Astro.url.pathname} not found</title>
+    <script>
+      // This script runs on the client and swaps in the teapot 1% of the time
+      window.addEventListener("DOMContentLoaded", () => {
+        if (Math.floor(Math.random() * 100) === 0) {
+          document.getElementById("teapot").style.display = "";
+          document.getElementById("notfound").style.display = "none";
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <Navigation/>
+    <div class="err-page">
+      <div id="teapot" style="display:none">
+        <h1>418</h1>
+        <h2>I'm a teapot <span aria-label="teapot" role="img">🫖</span></h2>
+      </div>
+      <div id="notfound">
+        <h1 class="errhone">404</h1>
+        <h2>"{Astro.url.pathname}" Not Found</h2>
+      </div>
+    </div>
+  </body>
+</html>

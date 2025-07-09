@@ -2,6 +2,7 @@
 const platform = "github";
 const username = "withastro";
 import Social from "./Social.astro";
+import DiscordCurrentActivities from "./discordCurrentActivities.jsx";
 ---
 
 <style>
@@ -11,8 +12,10 @@ import Social from "./Social.astro";
     margin-top: 2rem;
   }
 </style>
-<footer>
-  <Social platform="twitter" username="astrodotbuild" />
+<footer class="footer">
+  <!-- <Social platform="twitter" username="astrodotbuild" />
   <Social platform="github" username="withastro" />
-  <Social platform="youtube" username="astrodotbuild" />
+  <Social platform="youtube" username="astrodotbuild" /> -->
+  <p class="footer-text">©ABUCKY0 2025</p>
+  <!-- <DiscordCurrentActivities client:load /> -->
 </footer>

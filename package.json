@@ -9,6 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^4.3.0",
+    "@fontsource/work-sans": "^5.2.6",
     "astro": "^5.11.0"
   }
 }

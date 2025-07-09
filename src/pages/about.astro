@@ -2,7 +2,8 @@
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
-
+import "@fontsource/work-sans";
+import "@fontsource/work-sans/700.css";
 const pageTitle = "About Me";
 
 const identity = {
@@ -40,7 +41,7 @@ const skillColors = skills.map(() => getRandomColor());
     </style>
   </head>
   <body>
-    <Navigation />
+    <Navigation currentPath={Astro.url.pathname} />
     <h1>{pageTitle}</h1>
     <h2>...and my new astro site!</h2>
     <p>Here are a few facts about me:</p>

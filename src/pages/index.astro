@@ -1,7 +1,10 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
+import "@fontsource/work-sans";
+import "@fontsource/work-sans/700.css";
 import "../styles/global.css";
+import DiscordStatus from "../components/discordStatus.jsx";
 ---
 
 <html lang="en">
@@ -13,9 +16,112 @@ import "../styles/global.css";
 		<title>Astro</title>
 	</head>
 	<body>
-		<Navigation />
-		<h1>Balls</h1>
+		<Navigation currentPath={Astro.url.pathname} />
+		<h1 class="name">Hey, I'm Aaron!</h1>
 
+		<a
+			href="https://discord.com/users/925248483135463454"
+			style="link-style: none; color: inherit; link-decoration: none; text-decoration: none !important"
+		>
+			<div
+				style="display: flex; justify-content: center; align-items: center; gap: 0.5rem;"
+			>
+				<h2 style="margin: 0;">aka NotJohnnyTamale</h2>
+				<DiscordStatus client:load />
+			</div>
+		</a>
+
+		<div class="home-parent-container">
+			<div class="child home-left">
+				<p>I’m all of the following:</p>
+				<ul>
+					<li>Developer of random ass projects.</li>
+					<li>Freshman Computer Science Student at Lone Star College</li>
+					<li>Former Vex Robotics student</li>
+					<li>Raspberry Pi Tinkerer</li>
+				</ul>
+			</div>
+
+			<div class="vertline"></div>
+
+			<div class="icon-flex-group child home-right">
+				<img
+					src="https://skillicons.dev/icons?i=astro&theme=dark"
+					alt="Astro"
+				/>
+				<img src="https://skillicons.dev/icons?i=bash&theme=dark" alt="Bash" />
+				<img
+					src="https://skillicons.dev/icons?i=blender&theme=dark"
+					alt="Blender"
+				/>
+				<img src="https://skillicons.dev/icons?i=c&theme=dark" alt="C" />
+				<img src="https://skillicons.dev/icons?i=cpp&theme=dark" alt="C++" />
+				<img
+					src="https://skillicons.dev/icons?i=cloudflare&theme=dark"
+					alt="Cloudflare"
+				/>
+				<img src="https://skillicons.dev/icons?i=deno&theme=dark" alt="Deno" />
+				<img
+					src="https://skillicons.dev/icons?i=discordjs&theme=dark"
+					alt="Discord.js"
+				/>
+				<img
+					src="https://skillicons.dev/icons?i=docker&theme=dark"
+					alt="Docker"
+				/>
+				<img src="https://skillicons.dev/icons?i=git&theme=dark" alt="Git" />
+				<img
+					src="https://skillicons.dev/icons?i=github&theme=dark"
+					alt="GitHub"
+				/>
+				<img
+					src="https://skillicons.dev/icons?i=gradle&theme=dark"
+					alt="Gradle"
+				/>
+				<img src="https://skillicons.dev/icons?i=java&theme=dark" alt="Java" />
+				<img
+					src="https://skillicons.dev/icons?i=js&theme=dark"
+					alt="JavaScript"
+				/>
+				<img
+					src="https://skillicons.dev/icons?i=linux&theme=dark"
+					alt="Linux"
+				/>
+				<img
+					src="https://skillicons.dev/icons?i=netlify&theme=dark"
+					alt="Netlify"
+				/>
+				<img
+					src="https://skillicons.dev/icons?i=markdown&theme=dark"
+					alt="Markdown"
+				/>
+				<img
+					src="https://skillicons.dev/icons?i=ps&theme=dark"
+					alt="Photoshop"
+				/>
+				<img src="https://skillicons.dev/icons?i=py&theme=dark" alt="Python" />
+				<img
+					src="https://skillicons.dev/icons?i=raspberrypi&theme=dark"
+					alt="Raspberry Pi"
+				/>
+				<img
+					src="https://skillicons.dev/icons?i=replit&theme=dark"
+					alt="Replit"
+				/>
+				<img
+					src="https://skillicons.dev/icons?i=vercel&theme=dark"
+					alt="Vercel"
+				/>
+				<img
+					src="https://skillicons.dev/icons?i=vscode&theme=dark"
+					alt="VS Code"
+				/>
+				<img
+					src="https://skillicons.dev/icons?i=windows&theme=dark"
+					alt="Windows"
+				/>
+			</div>
+		</div>
 		<Footer />
 	</body>
 </html>
