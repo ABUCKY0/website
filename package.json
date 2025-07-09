@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
+    "@astrojs/tailwind": "^6.0.2",
     "@fontsource/work-sans": "^5.2.6",
+    "@r4ai/remark-callout": "^0.6.2",
     "astro": "^5.11.0"
   }
 }

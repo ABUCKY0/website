@@ -1,0 +1,89 @@
+---
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+import "../../styles/global.css";
+import "../../styles/blog.css";
+import "@fontsource/work-sans";
+import "@fontsource/work-sans/700.css";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
+type PostModule = {
+  frontmatter: {
+    title: string;
+    date?: string;
+    banner?: string;
+    bannerAlt?: string;
+    description?: string;
+    [key: string]: any;
+  };
+  Content: ReturnType<AstroComponentFactory>;
+};
+
+// Update this path if your .md files are in src/content/posts/
+const postImport = import.meta.glob("./content/*.md");
+
+export async function getStaticPaths() {
+  const postImport = import.meta.glob("./content/*.md");
+  const paths = [];
+  for (const path in postImport) {
+    const slug = path.split("/").pop()?.replace(".md", "") ?? "";
+    paths.push({ params: { slug } });
+  }
+  return paths;
+}
+
+const { slug } = Astro.params;
+let post: PostModule | undefined;
+for (const path in postImport) {
+  if (path.endsWith(`${slug}.md`)) {
+    post = (await postImport[path]()) as PostModule;
+    break;
+  }
+}
+if (!post) {
+  throw new Error(`Post not found: ${slug}`);
+}
+
+// Fix Astro/TypeScript error for dynamic component rendering
+const PostContent = post!.Content;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{post!.frontmatter.title}</title>
+  </head>
+  <body>
+    <Navigation currentPath={Astro.url.pathname} />
+    {
+      post!.frontmatter.banner && (
+        <img
+          src={post!.frontmatter.banner}
+          alt={post!.frontmatter.bannerAlt || "Banner image"}
+          class="blog-banner"
+        />
+      )
+    }
+    <main class="main-blog-content">
+      <article>
+        {
+          post!.frontmatter.date && (
+            <p class="blog-date-container">
+              <em class="blog-date">{post!.frontmatter.date}</em>
+            </p>
+          )
+        }
+        <h1 class="blog-title">{post!.frontmatter.title}</h1>
+        {
+          post!.frontmatter.description && (
+            <p class="blog-description">{post!.frontmatter.description}</p>
+          )
+        }
+        <hr class="blog-title-hr" />
+        {/* @ts-expect-error Astro dynamic component */}
+        <PostContent />
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

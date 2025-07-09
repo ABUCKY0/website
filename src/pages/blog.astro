@@ -3,7 +3,45 @@ import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 import "@fontsource/work-sans";
-import "@fontsource/work-sans/700.css";---
+import "@fontsource/work-sans/700.css";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
+type PostModule = {
+  frontmatter: {
+    title: string;
+    date?: string;
+    banner?: string;
+    bannerAlt?: string;
+    description?: string;
+    [key: string]: any;
+  };
+  Content: ReturnType<AstroComponentFactory>;
+};
+
+const postImport = import.meta.glob("./posts/content/*.md");
+
+const posts = await Promise.all(
+  Object.entries(postImport).map(async ([path, resolver]) => {
+    const post = (await resolver()) as PostModule;
+    // Extract the filename (without extension)
+    const filename = path.split("/").pop()?.replace(/\.md$/, "") ?? "";
+    return {
+      filename,
+      frontmatter: post.frontmatter,
+    };
+  }),
+);
+
+posts.sort((a, b) => {
+  // Sort by date if available, otherwise by title
+  const dateA = new Date(a.frontmatter.date || "1970-01-01");
+  const dateB = new Date(b.frontmatter.date || "1970-01-01");
+  return (
+    dateB.getTime() - dateA.getTime() ||
+    a.frontmatter.title.localeCompare(b.frontmatter.title)
+  );
+});
+---
 
 <html lang="en">
   <head>
@@ -14,8 +52,49 @@ import "@fontsource/work-sans/700.css";---
   <body>
     <Navigation currentPath={Astro.url.pathname} />
     <main class="main-content">
-      <h1>Blog</h1>
-      <p>Welcome to my blog where I share my learning journey with Astro!</p>
+      <h1 class="">Blog</h1>
+      <div class="blog-post-list">
+        {
+          posts.map((filename) => (
+            <a
+              href={`/posts/${filename.filename}`}
+              class="blog-li-link"
+              style="text-decoration: none !important;"
+            >
+              <article class="blog-li-post">
+                {filename.frontmatter.date && (
+                  <span class="blog-li-date">
+                    {new Date(filename.frontmatter.date).toLocaleDateString(
+                      "en-US",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      },
+                    )}
+                  </span>
+                )}
+
+                {filename.frontmatter.banner && (
+                  <img
+                    src={filename.frontmatter.banner}
+                    alt={filename.frontmatter.bannerAlt || "Blog Banner"}
+                    class="blog-li-banner"
+                  />
+                )}
+                <div class="post-li-content">
+                  <h2 class="post-li-title">{filename.frontmatter.title}</h2>
+                  {filename.frontmatter.description && (
+                    <p class="post-li-description">
+                      {filename.frontmatter.description}
+                    </p>
+                  )}
+                </div>
+              </article>
+            </a>
+          ))
+        }
+      </div>
     </main>
     <Footer />
   </body>
