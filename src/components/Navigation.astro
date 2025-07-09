@@ -11,7 +11,7 @@ import "@fontsource/work-sans/700.css";
     <!-- <a href="" class={currentPath === "/about" ? "active" : ""}>About</a> -->
     <a
       href="/projects"
-      class={Astro.url.pathname === "/projects" ? "active" : ""}>Projects</a
+      class={Astro.url.pathname.startsWith("/projects") ? "active" : ""}>Projects</a
     >
     <a
       href="/blog"
