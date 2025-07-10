@@ -3,7 +3,7 @@ title: 'Vex WS2812B LED Strips Guide'
 date: 2025-07-08
 description: 'A Guide on Using WS2812B LED Strips with a V5 VEX Robotics Brain'
 author: 'Astro Learner'
-banner: https://static.platform.michaels.com/2c-prd/152781609129696.jpg
+banner: /blog/ws2812b-guide-banner.jpg
 tags: ["vex", "robotics", "ws2812b", "leds", "guide"]
 ---
 ## Resources

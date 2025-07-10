@@ -15,4 +15,7 @@ export default defineConfig({
       remarkCallout,
     ],
   },
+  devToolbar: {
+    enabled: false
+  }
 });

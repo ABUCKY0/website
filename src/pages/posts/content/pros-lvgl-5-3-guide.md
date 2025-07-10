@@ -3,7 +3,7 @@ title: 'PROS LVGL 5.3 Guide'
 date: 2025-07-08
 description: 'A Guide to using LVGL 5.3 with PROS'
 author: 'ABUCKY0'
-banner: https://www.ti.com/content/dam/ticom/images/identities/third-party/j-l/lvgl-logo.png
+banner: /blog/lvgl-logo-lvgl53-guide.png
 tags: ["vex", "robotics", "lvgl", "graphics", "guide"]
 ---
 ## Prelude
