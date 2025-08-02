@@ -5,6 +5,7 @@ import "@fontsource/work-sans";
 import "@fontsource/work-sans/700.css";
 import "../styles/global.css";
 import DiscordStatus from "../components/discordStatus.jsx";
+import DiscordCurrentActivities from "../components/discordCurrentActivities";
 ---
 
 <html lang="en">
@@ -136,6 +137,7 @@ import DiscordStatus from "../components/discordStatus.jsx";
 					/>
 				</div>
 			</div>
+			<DiscordCurrentActivities client:load />
 		</main>
 		<Footer />
 	</body>

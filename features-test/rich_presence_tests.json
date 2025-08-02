@@ -1,0 +1,22 @@
+[
+  {
+    "type": 0,
+    "name": "Game",
+    "details": "Playing a game"
+  },
+  {
+    "type": 2,
+    "name": "Spotify",
+    "details": "Listening to music"
+  },
+  {
+    "type": 3,
+    "name": "YouTube",
+    "details": "Watching videos"
+  },
+  {
+    "type": 5,
+    "name": "Competition",
+    "details": "Competing"
+  }
+]
