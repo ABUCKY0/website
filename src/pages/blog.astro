@@ -13,6 +13,7 @@ type PostModule = {
     banner?: string;
     bannerAlt?: string;
     description?: string;
+    unlisted?: boolean;
     [key: string]: any;
   };
   Content: ReturnType<AstroComponentFactory>;
@@ -40,13 +41,21 @@ posts.sort((a, b) => {
     a.frontmatter.title.localeCompare(b.frontmatter.title)
   );
 });
+
+const filteredPosts = posts.filter(
+  (post) => post.frontmatter.unlisted !== true,
+);
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/81783950" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://avatars.githubusercontent.com/u/81783950"
+    />
     <title>Blog</title>
   </head>
   <body>
@@ -55,7 +64,7 @@ posts.sort((a, b) => {
       <h1 class="">Blog</h1>
       <div class="blog-post-list">
         {
-          posts.map((filename) => (
+          filteredPosts.map((filename) => (
             <a
               href={`/posts/${filename.filename}`}
               class="blog-li-link"
@@ -75,6 +84,7 @@ posts.sort((a, b) => {
                   </span>
                 )}
 
+                <h2 class="post-li-title">{filename.frontmatter.title}</h2>
                 {filename.frontmatter.banner && (
                   <img
                     src={filename.frontmatter.banner}
@@ -83,7 +93,6 @@ posts.sort((a, b) => {
                   />
                 )}
                 <div class="post-li-content">
-                  <h2 class="post-li-title">{filename.frontmatter.title}</h2>
                   {filename.frontmatter.description && (
                     <p class="post-li-description">
                       {filename.frontmatter.description}

@@ -1,13 +1,35 @@
+:root {
+  --blog-font-size: .95rem;
+  --blog-title-size: 2.25em;
+  --blog-h1-size: 1.5em;
+  --blog-h2-size: 1.2em;
+  --blog-h3-size: 1.05em;
+  --blog-p-size: var(--blog-font-size);
+  --blog-date-size: 0.9em;
+  --blog-code-block-font-size: var(--blog-p-size);
+  --blog-code-inline-font-size: var(--blog-p-size);
+}
 
+@media screen and (max-width: 700px) {
+  :root {
+    --blog-font-size: 0.9975rem;      /* 0.95rem * 1.05 */
+    --blog-title-size: 1.575em;       /* 1.5em * 1.05 */
+    --blog-h1-size: 1.155em;          /* 1.1em * 1.05 */
+    --blog-h2-size: 1.05em;           /* 1em * 1.05 */
+    --blog-h3-size: 0.9975em;         /* 0.95em * 1.05 */
+    --blog-p-size: 0.9975em;          /* 0.95em * 1.05 */
+  }
+}
 
 .main-blog-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  max-width: 50rem;
+  max-width: 60rem; /* was 70rem */
   margin: 0 auto;
   padding-top: 0rem;
   word-wrap: break-word;
+  font-size: var(--blog-font-size);
 }
 
 
@@ -34,8 +56,10 @@
 }
 
 .blog-date {
-  font-size: 0.9rem;
+  font-size: var(--blog-date-size);
   color: #888;
+  /* margin-top: 1rem;
+  margin-bottom: 0.5rem; */
 }
 
 .blog-date-container {
@@ -44,8 +68,8 @@
 }
 
 .blog-title {
-  font-size: 3rem;
-  margin-bottom: -1rem;
+  font-size: var(--blog-title-size);
+  /* margin-bottom: -1rem; */
 }
 
 .blog-title-hr {
@@ -64,12 +88,16 @@
   /* or any value you prefer */
 }
 
-.main-blog-content article pre,
-.main-blog-content article code {
-  padding: 1em;
+.main-blog-content article pre {
   border-radius: 0.5em;
   box-sizing: border-box;
-  text-wrap: wrap;
+  padding: 0.5em 0.75em; /* Add this line back for code block spacing */
+  
+}
+
+.main-blog-content article pre code {
+  font-size: var(--blog-code-block-font-size);
+  font-family: "Fira Mono", "Consolas", "Menlo", monospace;
 }
 
 .main-blog-content article code:not(pre code) {
@@ -77,51 +105,11 @@
   color: #E0E0E0;
   padding: 0.2em 0.4em;
   border-radius: 0.3em;
-  font-size: 0.95em;
+  /* font-size: 0.95em; */
   font-family: "Fira Mono", "Consolas", "Menlo", monospace;
   /* Optional: add a subtle border */
   border: 1px solid #2d2d2d;
-}
-
-
-@media screen and (max-width: 700px) {
-  .blog-title {
-    font-size: 2rem;
-  }
-
-  .blog-date-container {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .main-blog-content {
-    padding: 0rem;
-    max-width: 90%;
-  }
-
-  .main-blog-content article {
-    padding: 0rem;
-  }
-
-  .main-blog-content h1:not(.blog-title) {
-    font-size: 1.75rem;
-  }
-  .main-blog-content h2 {
-    font-size: 1.5rem;
-  }
-
-  .main-blog-content h3 {
-    font-size: 1.25rem;
-  }
-
-  .main-blog-content p {
-    font-size: 1rem;
-  }
-  .main-blog-content a {
-    font-size: 1rem;
-    color: #6699ff
-  }
-
+  font-size: var(--blog-code-inline-font-size);
 }
 
 
@@ -130,9 +118,15 @@
     padding: 0rem;
     max-width: 90%;
   }
-
   .main-blog-content article {
     padding: 0rem;
+  }
+  .activity-list-item {
+    min-width: 90vw;
+    max-width: 98vw;
+    padding: 0.75rem;
+    border-radius: 14px;
+    gap: 0.5rem;
   }
 }
 
@@ -216,4 +210,25 @@
 [data-callout-type="note"] [data-callout-title]::before {
   content: "📝 ";
   color: #7c3aed;
+}
+
+/* Custom scrollbar for Webkit browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 12px;
+  background: #23262d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Custom scrollbar for Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #23262d;
 }
