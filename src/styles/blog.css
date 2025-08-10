@@ -130,7 +130,10 @@
   }
 }
 
-
+a {
+  color: #87afff;
+  text-decoration: underline;
+}
 /* Base callout style */
 [data-callout] {
   border-radius: 6px;

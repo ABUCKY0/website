@@ -31,7 +31,7 @@ Thought I'd send it to you before it gets
 removed or patched.
 ```
 
-You need a bit of knowlege with powershell to notice anything weird about this. The first thing a seasoned programmer might notice is that in the if statement comparison, it uses only one equal sign. `if (($Mode = 'app')` isn't checking if `$Mode` is equal to `'app'`, it's setting $Mode to app. Powershell comparison operators are like `-eq` for equal, `-ne` for not equal, and similar. You can see all of them on [https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.5#assignment-operators](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.5#assignment-operators).
+You need a bit of knowlege with powershell to notice anything weird about this. The first thing a seasoned programmer might notice is that in the if statement comparison, it uses only one equal sign. `if (($Mode = 'app')` isn't checking if `$Mode` is equal to `'app'`, it's setting $Mode to app. Powershell comparison operators are like `-eq` for equal, `-ne` for not equal, and similar. You can see all of them on [the Microsoft powershell documentation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.5#assignment-operators).
 
 The second portion of that if statement is doing the same thing. `$ActivateNitro` is being set to `'nitro' + 'features.' + 'app' + '/dev'`. The `-and` in the middle is truthy, meaning it always evaluates to `true`.
 
@@ -99,6 +99,4 @@ I'll quickly go line by line below:
   ```
 
 # The malware itself
-During analyzing the above, I used a https://tria.ge vm. You can read the full report on [https://tria.ge/250805-vmsmlsyjw6/behavioral2](https://tria.ge/250805-vmsmlsyjw6/behavioral2), but tl;dr it's an infostealer. More specifically, it's a Lumma infostealer. According to triage, it tried to look at local email clients, indexed installed software on teh system, and looked to see if there were any other drives. I presume it can also steal discord tokens and such which allows this malware to spread. 
-
-
+During analyzing the above, I used a https://tria.ge vm. You can read the full report on [https://tria.ge/250805-vmsmlsyjw6/behavioral2](https://tria.ge/250805-vmsmlsyjw6/behavioral2), but tl;dr it's an infostealer. More specifically, it's a Lumma infostealer. According to triage, it tried to look at local email clients, indexed installed software on teh system, and looked to see if there were any other drives. I presume it can also steal discord tokens and such which allows this malware to spread. I can't look into it much farther because the scam domain was taken down when I had tried to go back in and look further. However, it's probably a standard "look in folders that have common stealable stuff like email logins and send them back to the control server".
