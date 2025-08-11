@@ -5,20 +5,43 @@ export default function DiscordStatus() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://api.lanyard.rest/v1/users/925248483135463454")
-      .then((res) => {
-        console.log("Fetch response:", res);
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Fetched data:", data);
-        setStatus(data.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Fetch error:", err);
-        setLoading(false);
-      });
+    const ws = new WebSocket("wss://api.lanyard.rest/socket");
+    let heartbeatInterval;
+    ws.onopen = () => {
+      ws.send(
+        JSON.stringify({
+          op: 2,
+          d: {
+            subscribe_to_id: "925248483135463454",
+          },
+        })
+      );
+    };
+    ws.onmessage = (event) => {
+      const msg = JSON.parse(event.data);
+      if (msg.t === "INIT_STATE" || msg.t === "PRESENCE_UPDATE") {
+        if (msg.d) {
+          setStatus(msg.d);
+          setLoading(false);
+        }
+      }
+      // Heartbeat
+      if (msg.op === 1 && typeof msg.d === "number") {
+        heartbeatInterval = setInterval(() => {
+          ws.send(JSON.stringify({ op: 3 }));
+        }, msg.d);
+      }
+    };
+    ws.onerror = (err) => {
+      console.error("WebSocket error:", err);
+    };
+    ws.onclose = () => {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+    };
+    return () => {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+      ws.close();
+    };
   }, []);
 
   if (loading) return <div></div>;
