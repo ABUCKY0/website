@@ -7,13 +7,42 @@ export default function DiscordCurrentActivities() {
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    fetch("https://api.lanyard.rest/v1/users/925248483135463454")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.data && Array.isArray(data.data.activities)) {
-          setActivities(data.data.activities);
+    const ws = new WebSocket("wss://api.lanyard.rest/socket");
+    let heartbeatInterval;
+    ws.onopen = () => {
+      ws.send(
+        JSON.stringify({
+          op: 2,
+          d: {
+            subscribe_to_id: "925248483135463454",
+          },
+        })
+      );
+    };
+    ws.onmessage = (event) => {
+      const msg = JSON.parse(event.data);
+      if (msg.t === "INIT_STATE" || msg.t === "PRESENCE_UPDATE") {
+        if (msg.d && Array.isArray(msg.d.activities)) {
+          setActivities(msg.d.activities);
         }
-      });
+      }
+      // Heartbeat
+      if (msg.op === 1 && typeof msg.d === "number") {
+        heartbeatInterval = setInterval(() => {
+          ws.send(JSON.stringify({ op: 3 }));
+        }, msg.d);
+      }
+    };
+    ws.onerror = (err) => {
+      console.error("WebSocket error:", err);
+    };
+    ws.onclose = () => {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+    };
+    return () => {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+      ws.close();
+    };
   }, []);
 
   if (!activities.length) return null;

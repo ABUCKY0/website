@@ -8,7 +8,9 @@ import icon from "astro-icon";
 export default defineConfig({
   integrations: [react(), icon()],
   markdown: {
-    // ...
+    shikiConfig: {
+      theme: 'dark-plus', // or any Shiki theme name
+    },
     remarkPlugins: [
       // ...
       remarkCallout,
