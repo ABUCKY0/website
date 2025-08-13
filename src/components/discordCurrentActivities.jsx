@@ -155,6 +155,7 @@ export default function DiscordCurrentActivities() {
               className={styles["activity-image"]}
               src={getLargeImageUrl(activity)}
               alt={activity.name}
+              onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = "/discord-icon-square-blue.png"; }}
             />
             <div className={styles["activity-text-body"]}>
               <div className={styles["activity-title"]}>
