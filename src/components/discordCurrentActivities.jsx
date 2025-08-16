@@ -99,10 +99,10 @@ export default function DiscordCurrentActivities() {
   };
 
   const getLargeImageUrl = (activity) => {
-    
+    // console.log("activity", activity.assets);
     if (activity.assets && activity.assets.large_image) {
       const img = activity.assets.large_image;
-      console.log(img);
+      
 
       // Handle Spotify album art
       if (img.startsWith("spotify:")) {
@@ -113,29 +113,23 @@ export default function DiscordCurrentActivities() {
         }
       }
 
-      // ✅ Fixed mp:external parsing
       if (img.startsWith("mp:external/")) {
-        const parts = img.split("/");
-        const maybeProtocol = parts[2];
-        if (maybeProtocol === "https" || maybeProtocol === "http") {
-          return `${maybeProtocol}://${parts.slice(3).join("/")}`;
-        }
-        // fallback to CDN format if malformed
-        if (activity.application_id) {
-          return `https://cdn.discordapp.com/app-assets/${activity.application_id}/${img}.png`;
-        }
+        return img.replace("mp:", "https://media.discordapp.net/");
       }
 
-      if (/^\d+$/.test(img) && activity.application_id) {
-        return `https://cdn.discordapp.com/app-assets/${activity.application_id}/${img}.png`;
-      }
-
-      if (activity.application_id) {
-        return `https://cdn.discordapp.com/app-assets/${activity.application_id}/${img}.png`;
-      }
+      return `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.webp?size=512`
+      
+    }
+    console.log(activity.application_id);
+    console.log(activity.assets.large_image);
+    if (activity.application_id && !activity.assets.large_image) {
+      console.log("Using dcdn.dstn.to for app icon", activity.application_id);
+      return `https://dcdn.dstn.to/app-icons/${activity.application_id}.webp?size=512`;
     }
 
-    return "/icons/discord.svg"; 
+    console.log("No large image found for activity:", activity);
+
+    return "/discord-icon-square-blue.png"; 
   };
 
   return (
