@@ -58,7 +58,7 @@
 
 .activity-image {
   width: 8rem;
-  height: currentwidth;
+  height: 8rem;
   border-radius: 12px;
   object-fit: cover;
   background: #18191c;
@@ -137,6 +137,7 @@
     width: 5rem;
     height: 5rem;
     border-radius: 8px;
+    aspect-ratio: 1 / 1;
   }
 
   .activity-title {
