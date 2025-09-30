@@ -63,12 +63,17 @@ const PostContent = post!.Content;
       )
     }
 
-    <meta name="og:title" content={post!.frontmatter.title} />
-    <meta name="og:image" content={post!.frontmatter.banner} />
-    <meta name="og:image:alt" content={post!.frontmatter.bannerAlt}/>
-    <meta name="og:url" content={Astro.url.href} />
-    <meta name="og:description" content={post!.frontmatter.description} />
-    <meta name="og:site_name" content="abucky.dev" />
+    <meta property="og:title" content={post!.frontmatter.title} />
+    <meta property="og:image" content={post!.frontmatter.banner} />
+    <meta property="og:image:alt" content={post!.frontmatter.bannerAlt} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:description" content={post!.frontmatter.description} />
+    <meta property="og:site_name" content="abucky.dev" />
+
+    <meta name="twitter:card" content={post!.frontmatter.banner} />
+    <meta name="twitter:title" content={post!.frontmatter.title} />
+    <meta name="twitter:description" content={post!.frontmatter.description} />
+    <meta name="twitter:image" content={post!.frontmatter.banner} />
   </head>
   <body>
     <Navigation currentPath={Astro.url.pathname} />
