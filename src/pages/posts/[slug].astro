@@ -14,7 +14,7 @@ type PostModule = {
     banner?: string;
     bannerAlt?: string;
     description?: string;
-    [key: string]: any;
+    [tags: string]: any;
   };
   Content: ReturnType<AstroComponentFactory>;
 };
@@ -56,6 +56,19 @@ const PostContent = post!.Content;
       type="image/png"
       href="https://avatars.githubusercontent.com/u/81783950"
     />
+
+    {
+      post!.frontmatter.tags && (
+        <meta name="keywords" content={post!.frontmatter.tags.join(", ")} />
+      )
+    }
+
+    <meta name="og:title" content={post!.frontmatter.title} />
+    <meta name="og:image" content={post!.frontmatter.banner} />
+    <meta name="og:image:alt" content={post!.frontmatter.bannerAlt}/>
+    <meta name="og:url" content={Astro.url.href} />
+    <meta name="og:description" content={post!.frontmatter.description} />
+    <meta name="og:site_name" content="abucky.dev" />
   </head>
   <body>
     <Navigation currentPath={Astro.url.pathname} />
