@@ -7,9 +7,11 @@ import icon from "astro-icon";
 import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), icon(), sitemap({
-    filter: (page) => page !== 'https://abucky.dev/test/',
-  }),],
+  integrations: [react(), icon(), 
+  //   sitemap({
+  //   filter: (page) => page !== 'https://abucky.dev/test/',
+  // }),
+],
   markdown: {
     shikiConfig: {
       theme: 'dark-plus', // or any Shiki theme name
