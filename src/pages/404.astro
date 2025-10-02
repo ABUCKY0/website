@@ -11,8 +11,13 @@ import Footer from "../components/Footer.astro";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/81783950" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://avatars.githubusercontent.com/u/81783950"
+    />
     <title>404: {Astro.url.pathname} not found</title>
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <script>
       window.addEventListener("DOMContentLoaded", () => {
         let random = Math.floor(Math.random() * 100);
