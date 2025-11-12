@@ -102,7 +102,7 @@ export default function DiscordCurrentActivities() {
     // console.log("activity", activity.assets);
     if (activity.assets && activity.assets.large_image) {
       const img = activity.assets.large_image;
-      
+      console.log(activity);
 
       // Handle Spotify album art
       if (img.startsWith("spotify:")) {
@@ -134,7 +134,12 @@ export default function DiscordCurrentActivities() {
 
   return (
     <div className={styles["activities-list"]}>
-      {activities.map((activity, index) => (
+      {activities
+        .filter((activity) => {
+          // Exclude activities with id === "custom" (guard for missing id)
+          return !(activity && activity.id && String(activity.id) === "custom");
+        })
+        .map((activity, index) => (
 
 
         <div key={index} className={styles["activity-list-item"]}>
