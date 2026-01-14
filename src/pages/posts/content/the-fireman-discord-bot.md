@@ -2,7 +2,7 @@
 title: 'The Fireman Discord Bot'
 date: 2026-1-13
 description: 'What is the Fireman Discord Bot?'
-author: 'Astro Learner'
+author: 'ABUCKY0'
 banner: /blog/fireman-bot/the-fireman-bot-banner.png
 tags: ["discord", "bot", "discord bot"]
 unlisted: true
