@@ -12,7 +12,7 @@ The Fireman is an in-house moderation bot designed for the Minecraft RTX Discord
 
 One of the common scam types we see in the Minecraft RTX Discord that bypassed our automod rules were image scams. These contain usually either one or four photos of a screen, usually of a fake Twitter page or a crypto page. These usually contain steps to follow and a fake outcome from following the steps, and are only caught by Automod rules that block links and images for users who haven't had a full conversation in the server. (Tatsu handles this with our role ranking system). Our support channels weren't subject to this rank system because we wanted new users of BetterRTX to be able to send images to help diagnose issues with Minecraft or BetterRTX. 
 
-The Fireman hopes to solve this problem with a two pronged approach: A firepit channel, which "kicks" anyone who sends a message here, and the `/permgrant` command. (The "kick" is actually technically an immediate ban and unban, which serves to delete messges by the user in the last hour.)
+The Fireman hopes to solve this problem with a two pronged approach: A firepit channel, which "kicks" anyone who sends a message there, and the `/permgrant` command. (The "kick" is actually technically an immediate ban and unban, which serves to delete messges by the user in the last hour.)
 
 ## Rules of the Firepit
 1. Don't talk while watching the fire. Doing so results in you being burnt. 
