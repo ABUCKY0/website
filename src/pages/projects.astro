@@ -5,12 +5,14 @@ import "../styles/global.css";
 import "../styles/projects.css";
 import "@fontsource/work-sans";
 import "@fontsource/work-sans/700.css";
+import { markdown } from "@astropub/md";
 
 type ProjectModule = {
   frontmatter: {
     title: string;
     description?: string;
-    date?: string;
+    start_year?: string;
+    end_year?: string;
     link?: string;
     github?: string;
     devicons?: string[];
@@ -22,11 +24,15 @@ const projectImport = import.meta.glob("./projects/*.md");
 const projects = await Promise.all(
   Object.entries(projectImport).map(async ([path, resolver]) => {
     const project = (await resolver()) as ProjectModule;
+    const descriptionText =
+      project.frontmatter.description ?? "No description available.";
+    const descriptionHtml = await markdown.inline(descriptionText);
     // Extract the filename (without extension)
     const filename = path.split("/").pop()?.replace(/\.md$/, "") ?? "";
     return {
       filename,
       frontmatter: project.frontmatter,
+      descriptionHtml,
     };
   }),
 );
@@ -34,6 +40,7 @@ const projects = await Promise.all(
 projects.sort((a, b) => {
   return a.frontmatter.title.localeCompare(b.frontmatter.title);
 });
+
 ---
 
 <html lang="en">
@@ -89,23 +96,33 @@ projects.sort((a, b) => {
         {
           projects.map((project) => (
             <div class="project">
-              <h1 class="project-title">
-                <a href={`${project.frontmatter.link}`} class="project-title">
-                  {project.frontmatter.title}
-                </a>
-              </h1>
-              <div class="project-icons">
-                <a
-                  class="devicon-github-original project-gh-icon"
-                  href={project.frontmatter.github}
+              <div class="project-body">
+                <h1 class="project-title">
+                  <a href={`${project.frontmatter.link}`} class="project-title">
+                    {project.frontmatter.title}
+                  </a>
+                </h1>
+                <div class="project-icons">
+                  <a
+                    class="devicon-github-original project-gh-icon"
+                    href={project.frontmatter.github}
+                  />
+
+                  {project.frontmatter.devicons?.map((icon) => (
+                    <i class={`devicon-${icon}-plain`} />
+                  ))}
+                  <br />
+                </div>
+                <p
+                  class="project-description"
+                  set:html={project.descriptionHtml}
                 />
-                {project.frontmatter.devicons?.map((icon) => (
-                  <i class={`devicon-${icon}-plain`} />
-                ))}
               </div>
-              <p class="project-description">
-                {project.frontmatter.description || "No description available."}
-              </p>
+
+              <span class="project-date">
+                {project.frontmatter.start_year} -{" "}
+                {project.frontmatter.end_year}
+              </span>
             </div>
           ))
         }
