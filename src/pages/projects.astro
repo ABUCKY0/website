@@ -77,7 +77,7 @@ projects.sort((a, b) => {
         });
 
         projects.forEach((project) => project.classList.remove("active"));
-        if (activeProject) activeProject.classList.add("active");
+        if (activeProject) (activeProject as Element).classList.add("active");
       }
 
       if (window.innerWidth <= 700) {

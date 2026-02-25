@@ -71,7 +71,8 @@
   width: 100%;
   aspect-ratio: 1 / 1;
   background-color: #000;
-  max-width: 30rem;
+  max-width: 25rem;
+  min-width: 10rem;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
