@@ -11,8 +11,8 @@ type ProjectModule = {
   frontmatter: {
     title: string;
     description?: string;
-    start_year?: string;
-    end_year?: string;
+    start_year: string;
+    end_year: string;
     link?: string;
     github?: string;
     devicons?: string[];
@@ -24,11 +24,14 @@ const projectImport = import.meta.glob("./projects/*.md");
 const projects = await Promise.all(
   Object.entries(projectImport).map(async ([path, resolver]) => {
     const project = (await resolver()) as ProjectModule;
+
     const descriptionText =
       project.frontmatter.description ?? "No description available.";
+
     const descriptionHtml = await markdown.inline(descriptionText);
-    // Extract the filename (without extension)
+
     const filename = path.split("/").pop()?.replace(/\.md$/, "") ?? "";
+
     return {
       filename,
       frontmatter: project.frontmatter,
@@ -38,27 +41,36 @@ const projects = await Promise.all(
 );
 
 projects.sort((a, b) => {
+  const aStart = Number(a.frontmatter.start_year);
+  const bStart = Number(b.frontmatter.start_year);
+
+  if (aStart !== bStart) return bStart - aStart;
+
   return a.frontmatter.title.localeCompare(b.frontmatter.title);
 });
-
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+
     <link
       rel="stylesheet"
       type="text/css"
       href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
     />
+
     <link
       rel="icon"
       type="image/png"
       href="https://avatars.githubusercontent.com/u/81783950"
     />
+
     <title>Projects</title>
+
     <link rel="sitemap" href="/sitemap-index.xml" />
+
     <script>
       function setActiveProject() {
         const projects = document.querySelectorAll(".project");
@@ -70,6 +82,7 @@ projects.sort((a, b) => {
           const rect = project.getBoundingClientRect();
           const projectCenter = rect.top + rect.height / 2;
           const dist = Math.abs(projectCenter - viewportCenter);
+
           if (dist < minDist) {
             minDist = dist;
             activeProject = project;
@@ -77,42 +90,56 @@ projects.sort((a, b) => {
         });
 
         projects.forEach((project) => project.classList.remove("active"));
-        if (activeProject) (activeProject as Element).classList.add("active");
+
+        if (activeProject) {
+          activeProject.classList.add("active");
+        }
       }
 
       if (window.innerWidth <= 700) {
-        window.addEventListener("scroll", setActiveProject, { passive: true });
+        window.addEventListener("scroll", setActiveProject, {
+          passive: true,
+        });
+
         window.addEventListener("resize", setActiveProject);
         window.addEventListener("DOMContentLoaded", setActiveProject);
+
         setActiveProject();
       }
     </script>
   </head>
+
   <body>
     <Navigation currentPath={Astro.url.pathname} />
+
     <main class="main-content">
       <h1>Projects</h1>
+
       <div class="project-list">
         {
           projects.map((project) => (
-            <div class="project">
+            <div
+              class="project"
+              onclick={`window.location.href='${project.frontmatter.link}'`}
+            >
+              {/* <a href={project.frontmatter.link} class="project-card-link" ></a> */}
+
               <div class="project-body">
-                <h1 class="project-title">
-                  <a href={`${project.frontmatter.link}`} class="project-title">
-                    {project.frontmatter.title}
-                  </a>
-                </h1>
+                <h1 class="project-title">{project.frontmatter.title}</h1>
+
                 <div class="project-icons">
-                  <a
-                    class="devicon-github-original project-gh-icon"
-                    href={project.frontmatter.github}
-                  />
+                  {project.frontmatter.github && (
+                    <a
+                      class="devicon-github-original project-gh-icon"
+                      href={project.frontmatter.github}
+                    />
+                  )}
 
                   {project.frontmatter.devicons?.map((icon) => (
                     <i class={`devicon-${icon}-plain`} />
                   ))}
-                  <br />
                 </div>
+
                 <p
                   class="project-description"
                   set:html={project.descriptionHtml}
@@ -120,14 +147,16 @@ projects.sort((a, b) => {
               </div>
 
               <span class="project-date">
-                {project.frontmatter.start_year} -{" "}
-                {project.frontmatter.end_year}
+                {project.frontmatter.start_year === project.frontmatter.end_year
+                  ? project.frontmatter.start_year
+                  : `${project.frontmatter.start_year} - ${project.frontmatter.end_year}`}
               </span>
             </div>
           ))
         }
       </div>
     </main>
+
     <Footer />
   </body>
 </html>

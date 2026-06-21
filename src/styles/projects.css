@@ -1,55 +1,3 @@
-/* Add 30 more project children for border and shadow on hover */
-/* .project:nth-child(21):hover { border-color: #ff5252; box-shadow: 0 0 24px 4px #ff5252; }
-.project:nth-child(22):hover { border-color: #ff4081; box-shadow: 0 0 24px 4px #ff4081; }
-.project:nth-child(23):hover { border-color: #e040fb; box-shadow: 0 0 24px 4px #e040fb; }
-.project:nth-child(24):hover { border-color: #7c4dff; box-shadow: 0 0 24px 4px #7c4dff; }
-.project:nth-child(25):hover { border-color: #448aff; box-shadow: 0 0 24px 4px #448aff; }
-.project:nth-child(26):hover { border-color: #40c4ff; box-shadow: 0 0 24px 4px #40c4ff; }
-.project:nth-child(27):hover { border-color: #18ffff; box-shadow: 0 0 24px 4px #18ffff; }
-.project:nth-child(28):hover { border-color: #64ffda; box-shadow: 0 0 24px 4px #64ffda; }
-.project:nth-child(29):hover { border-color: #69f0ae; box-shadow: 0 0 24px 4px #69f0ae; }
-.project:nth-child(30):hover { border-color: #b2ff59; box-shadow: 0 0 24px 4px #b2ff59; }
-.project:nth-child(31):hover { border-color: #eeff41; box-shadow: 0 0 24px 4px #eeff41; }
-.project:nth-child(32):hover { border-color: #ffff00; box-shadow: 0 0 24px 4px #ffff00; }
-.project:nth-child(33):hover { border-color: #ffd740; box-shadow: 0 0 24px 4px #ffd740; }
-.project:nth-child(34):hover { border-color: #ffc400; box-shadow: 0 0 24px 4px #ffc400; }
-.project:nth-child(35):hover { border-color: #ffab00; box-shadow: 0 0 24px 4px #ffab00; }
-.project:nth-child(36):hover { border-color: #ff6f00; box-shadow: 0 0 24px 4px #ff6f00; }
-.project:nth-child(37):hover { border-color: #ff8a65; box-shadow: 0 0 24px 4px #ff8a65; }
-.project:nth-child(38):hover { border-color: #d7ccc8; box-shadow: 0 0 24px 4px #d7ccc8; }
-.project:nth-child(39):hover { border-color: #8d6e63; box-shadow: 0 0 24px 4px #8d6e63; }
-.project:nth-child(40):hover { border-color: #bdbdbd; box-shadow: 0 0 24px 4px #bdbdbd; }
-.project:nth-child(41):hover { border-color: #78909c; box-shadow: 0 0 24px 4px #78909c; }
-.project:nth-child(42):hover { border-color: #607d8b; box-shadow: 0 0 24px 4px #607d8b; }
-.project:nth-child(43):hover { border-color: #263238; box-shadow: 0 0 24px 4px #263238; }
-.project:nth-child(44):hover { border-color: #c51162; box-shadow: 0 0 24px 4px #c51162; }
-.project:nth-child(45):hover { border-color: #aa00ff; box-shadow: 0 0 24px 4px #aa00ff; }
-.project:nth-child(46):hover { border-color: #6200ea; box-shadow: 0 0 24px 4px #6200ea; }
-.project:nth-child(47):hover { border-color: #304ffe; box-shadow: 0 0 24px 4px #304ffe; }
-.project:nth-child(48):hover { border-color: #0091ea; box-shadow: 0 0 24px 4px #0091ea; }
-.project:nth-child(49):hover { border-color: #00b8d4; box-shadow: 0 0 24px 4px #00b8d4; }
-.project:nth-child(50):hover { border-color: #00bfae; box-shadow: 0 0 24px 4px #00bfae; } */
-/* .project:nth-child(1)  { border: 4px solid #e57373; }
-.project:nth-child(2)  { border: 4px solid #64b5f6; }
-.project:nth-child(3)  { border: 4px solid #81c784; }
-.project:nth-child(4)  { border: 4px solid #ffd54f; }
-.project:nth-child(5)  { border: 4px solid #ba68c8; }
-.project:nth-child(6)  { border: 4px solid #4db6ac; }
-.project:nth-child(7)  { border: 4px solid #ff8a65; }
-.project:nth-child(8)  { border: 4px solid #a1887f; }
-.project:nth-child(9)  { border: 4px solid #90caf9; }
-.project:nth-child(10) { border: 4px solid #f06292; }
-.project:nth-child(11) { border: 4px solid #9575cd; }
-.project:nth-child(12) { border: 4px solid #aed581; }
-.project:nth-child(13) { border: 4px solid #fff176; }
-.project:nth-child(14) { border: 4px solid #4fc3f7; }
-.project:nth-child(15) { border: 4px solid #ffb74d; }
-.project:nth-child(16) { border: 4px solid #dce775; }
-.project:nth-child(17) { border: 4px solid #b0bec5; }
-.project:nth-child(18) { border: 4px solid #f44336; }
-.project:nth-child(19) { border: 4px solid #00bcd4; }
-.project:nth-child(20) { border: 4px solid #cddc39; } */
-/* Palette of 20 border/glow colors using nth-child */
 .project-list {
   min-height: 80vh;
   display: grid;
@@ -62,8 +10,6 @@
   background-color: black;
   box-sizing: border-box;
   overflow: visible;
-  /* border-color: red;
-  border: 2px solid red; */
   color: #CCC
 }
 
@@ -82,6 +28,25 @@
   transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
   border: 4px solid #2223;
   box-shadow: none;
+
+  position: relative;
+}
+
+.project-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+.project-body,
+.project-date {
+  position: relative;
+  z-index: 2;
+}
+
+.project-gh-icon {
+  position: relative;
+  z-index: 100;
 }
 
 @media screen and (max-width: 700px) {
@@ -90,9 +55,9 @@
     max-width: 100vw;
     grid-template-columns: 1fr;
   }
+
   .project {
     width: 20rem;
-    /* height: 20rem; */
   }
 }
 
@@ -108,7 +73,6 @@ a {
   flex: 1;
   width: 100%;
 }
-/* On hover: show border and shadow */
 
 .project:nth-child(1):hover, .project:nth-child(1).active{ border-color: #e57373;  box-shadow: 0 0 24px 4px #e57373;  }
 .project:nth-child(2):hover, .project:nth-child(2).active{ border-color: #64b5f6;  box-shadow: 0 0 24px 4px #64b5f6;  }
@@ -161,14 +125,6 @@ a {
 .project:nth-child(49):hover, .project:nth-child(49).active{ border-color: #ff7043;  box-shadow: 0 0 24px 4px #ff7043;  }
 .project:nth-child(50):hover, .project:nth-child(50).active{ border-color: #7c4dff;  box-shadow: 0 0 24px 4px #7c4dff;  }
 
-
-/* Limit to 4 columns max on large screens */
-/* @media (min-width: 64rem) {
-  .project-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-} */
-
 i {
   font-style: normal;
   margin-left: 0.25rem;
@@ -186,14 +142,15 @@ i {
   color: inherit;
   font-style: normal;
   margin-left: 0.25rem;
-  margin-right: .25rem;
+  margin-right: 0.25 rem;
   transition: color 0.3s ease;
 }
 
-.project-gh-icon:hover{
+.project-gh-icon:hover {
   color: #fff;
   transition: color 0.3s ease;
 }
+
 .project-description {
   margin: 0rem;
   text-align: center;
@@ -201,29 +158,33 @@ i {
   max-height: none;
 }
 
-/* @media screen and (max-width: 700px) {
-  .project {
-    width: 20rem;
-    height: 20rem;
-  }
-} */
-
 .project-title {
   font-size: 1.5rem;
   text-align: center;
   font-weight: bold;
   margin: 0.5rem;
-  color:white;
+  color: white;
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.project:hover {
+  .project-title {
+    color: #6699ff;
+    transition: color 0.3s ease;
+  }
 }
 
 .project-github-logo {
   height: 1rem;
   width: 1rem;
+  z-index: 100;
 }
 
 .project-icons {
-  margin: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
   text-align: center;
   color: #aaa
 }
