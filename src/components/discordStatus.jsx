@@ -4,45 +4,84 @@ export default function DiscordStatus() {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(true);
 
+ // Lanyard WebSocket
   useEffect(() => {
-    const ws = new WebSocket("wss://api.lanyard.rest/socket");
-    let heartbeatInterval;
-    ws.onopen = () => {
-      ws.send(
-        JSON.stringify({
-          op: 2,
-          d: {
-            subscribe_to_id: "925248483135463454",
-          },
-        })
-      );
-    };
-    ws.onmessage = (event) => {
-      const msg = JSON.parse(event.data);
-      if (msg.t === "INIT_STATE" || msg.t === "PRESENCE_UPDATE") {
-        if (msg.d) {
-          setStatus(msg.d);
-          setLoading(false);
+    let ws;
+    let heartbeat;
+    let reconnectTimeout;
+
+    const connect = () => {
+      ws = new WebSocket("wss://api.lanyard.rest/socket");
+
+      ws.onopen = () => {
+        console.log("Connected to Lanyard");
+      };
+
+      ws.onmessage = (event) => {
+        const msg = JSON.parse(event.data);
+
+        // HELLO (op 1)
+        if (msg.op === 1) {
+          const interval = msg.d.heartbeat_interval;
+
+          clearInterval(heartbeat);
+          heartbeat = setInterval(() => {
+            ws.send(JSON.stringify({ op: 3 }));
+          }, interval);
+
+          // Subscribe AFTER HELLO
+          ws.send(
+            JSON.stringify({
+              op: 2,
+              d: { subscribe_to_id: "925248483135463454" }
+            })
+          );
         }
-      }
-      // Heartbeat
-      if (msg.op === 1 && typeof msg.d === "number") {
-        heartbeatInterval = setInterval(() => {
-          ws.send(JSON.stringify({ op: 3 }));
-        }, msg.d);
-      }
+
+        // HEARTBEAT ACK (op 3)
+        if (msg.op === 3) {
+          // optional
+        }
+
+        // RECONNECT (op 4)
+        if (msg.op === 4) {
+          console.log("Lanyard requested reconnect");
+          ws.close();
+          return;
+        }
+
+        // INIT_STATE or PRESENCE_UPDATE
+        if (msg.t === "INIT_STATE" || msg.t === "PRESENCE_UPDATE") {
+          if (msg.d?.activities) {
+            setActivities(msg.d.activities);
+          }
+        }
+      };
+
+      ws.onclose = () => {
+        console.log("Disconnected from Lanyard, retrying...");
+        clearInterval(heartbeat);
+
+        reconnectTimeout = setTimeout(() => {
+          connect();
+        }, 1000);
+      };
+
+      ws.onerror = () => {
+        ws.close();
+      };
     };
-    ws.onerror = (err) => {
-      console.error("WebSocket error:", err);
-    };
-    ws.onclose = () => {
-      if (heartbeatInterval) clearInterval(heartbeatInterval);
-    };
+
+    connect();
+
     return () => {
-      if (heartbeatInterval) clearInterval(heartbeatInterval);
-      ws.close();
+      clearInterval(heartbeat);
+      clearTimeout(reconnectTimeout);
+      ws?.close();
     };
   }, []);
+
+
 
   if (loading) return <div></div>;
   if (!status) return <div></div>;
