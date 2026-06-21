@@ -84,7 +84,7 @@ const filteredPosts = posts.filter(
                     )}
                   </span>
                 )}
-
+                <hr>
                 <h2 class="post-li-title">{filename.frontmatter.title}</h2>
                 {filename.frontmatter.banner && (
                   <img
@@ -93,6 +93,7 @@ const filteredPosts = posts.filter(
                     class="blog-li-banner"
                   />
                 )}
+                <hr>
                 <div class="post-li-content">
                   {filename.frontmatter.description && (
                     <p class="post-li-description">
