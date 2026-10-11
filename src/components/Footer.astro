@@ -2,21 +2,15 @@
 const platform = "github";
 const username = "withastro";
 import Social from "./Social.astro";
-import DiscordCurrentActivities from "./discordCurrentActivities.jsx";
+import DiscordCurrentActivities from "./discordCurrentActivitiesFooter.jsx";
 ---
 
-<style>
-  footer {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-</style>
 <footer class="footer">
   <!-- <Social platform="twitter" username="astrodotbuild" />
   <Social platform="github" username="withastro" />
   <Social platform="youtube" username="astrodotbuild" /> -->
-  <p class="footer-text">©ABUCKY0 2026</p>
-  <!-- <DiscordCurrentActivities client:load /> -->
+  <div class="footer-inner">
+    <DiscordCurrentActivities client:load />
+  </div>
   <!-- if domain is localhost, show a Development message -->
 </footer>

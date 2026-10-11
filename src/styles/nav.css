@@ -1,0 +1,59 @@
+/* ====== Navigation ====== */
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1rem;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(32rem, calc(100% - 2rem));
+  margin-inline: auto;
+  padding: 0.75rem;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.nav-links a {
+  flex: 1;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.65rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #dedede;
+  background-color: #ffffff07;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.nav-links a.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-links a:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+.expanded {
+  display: unset;
+}

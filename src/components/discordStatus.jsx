@@ -1,87 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useLanyard } from "use-lanyard";
+
+const DISCORD_ID = "925248483135463454";
 
 export default function DiscordStatus() {
-  const [status, setStatus] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const status = useLanyard(DISCORD_ID);
 
-  useEffect(() => {
-    let ws;
-    let heartbeat;
-    let reconnectTimeout;
-
-    const connect = () => {
-      ws = new WebSocket("wss://api.lanyard.rest/socket");
-
-      ws.onopen = () => {
-        console.log("Connected to Lanyard");
-      };
-
-      ws.onmessage = (event) => {
-        const msg = JSON.parse(event.data);
-
-        // HELLO
-        if (msg.op === 1) {
-          const interval = msg.d.heartbeat_interval;
-
-          clearInterval(heartbeat);
-
-          heartbeat = setInterval(() => {
-            if (ws.readyState === WebSocket.OPEN) {
-              ws.send(JSON.stringify({ op: 3 }));
-            }
-          }, interval);
-
-          ws.send(
-            JSON.stringify({
-              op: 2,
-              d: {
-                subscribe_to_id: "925248483135463454",
-              },
-            }),
-          );
-
-          return;
-        }
-
-        // RECONNECT
-        if (msg.op === 4) {
-          ws.close();
-          return;
-        }
-
-        // PRESENCE DATA
-        if (
-          msg.t === "INIT_STATE" ||
-          msg.t === "PRESENCE_UPDATE"
-        ) {
-          setStatus(msg.d);
-          setLoading(false);
-        }
-      };
-
-      ws.onclose = () => {
-        clearInterval(heartbeat);
-
-        reconnectTimeout = setTimeout(() => {
-          connect();
-        }, 1000);
-      };
-
-      ws.onerror = () => {
-        ws.close();
-      };
-    };
-
-    connect();
-
-    return () => {
-      clearInterval(heartbeat);
-      clearTimeout(reconnectTimeout);
-      ws?.close();
-    };
-  }, []);
-
-  if (loading || !status) {
+  if (!status) {
     return <div />;
   }
 

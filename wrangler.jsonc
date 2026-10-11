@@ -1,8 +1,7 @@
 {
   "name": "my-astro-app",
-  // Update to today's date
   "compatibility_date": "2025-03-25",
-  "assets": {
-    "directory": "./dist"
-  }
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
 }

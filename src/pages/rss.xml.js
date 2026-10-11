@@ -1,6 +1,8 @@
 import rss from '@astrojs/rss';
 import sanitizeHtml from 'sanitize-html';
 
+export const prerender = false;
+
 export async function GET(context) {
   const postImportResult = import.meta.glob('./posts/content/*.md', { eager: true });
   const posts = Object.values(postImportResult);
