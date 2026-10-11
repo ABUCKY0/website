@@ -61,6 +61,6 @@ export default defineConfig({
   //   enabled: false
   // },
   site: 'https://abucky.dev',
-  output: 'static',
+  output: 'server',
   adapter: cloudflare()
 });
