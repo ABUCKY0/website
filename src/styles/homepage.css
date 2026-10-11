@@ -22,7 +22,7 @@
 /* Mobile First */
 .homepage {
   display: grid;
-  grid-template-columns: 1;
+  grid-template-columns: 1fr;
   grid-template-areas:
     "main"
     "projects"

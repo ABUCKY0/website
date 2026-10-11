@@ -6,6 +6,8 @@
     "dev": "astro dev",
     "devhost": "astro dev --host",
     "build": "astro build",
+    "build:pages": "astro build",
+    "dev:pages": "npm run build:pages && wrangler pages dev dist",
     "preview": "astro preview",
     "astro": "astro",
     "generate-types": "wrangler types"
