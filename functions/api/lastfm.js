@@ -1,10 +1,6 @@
-import { env } from "cloudflare:workers";
-
-export const prerender = false;
-
 const LASTFM_USERNAME = "ABUCKY0";
 
-export async function GET() {
+export async function onRequestGet({ env }) {
   const apiKey = env.LASTFM_API_KEY;
 
   if (!apiKey) {
@@ -41,13 +37,14 @@ export async function GET() {
     );
   }
 
-  return Response.json({
-    track: {
-      artist: recentTrack.artist?.["#text"] || "Unknown artist",
-      name: recentTrack.name || "Unknown track",
-      nowPlaying: recentTrack["@attr"]?.nowplaying === "true",
+  return Response.json(
+    {
+      track: {
+        artist: recentTrack.artist?.["#text"] || "Unknown artist",
+        name: recentTrack.name || "Unknown track",
+        nowPlaying: recentTrack["@attr"]?.nowplaying === "true",
+      },
     },
-  }, {
-    headers: { "Cache-Control": "no-store" },
-  });
+    { headers: { "Cache-Control": "no-store" } }
+  );
 }

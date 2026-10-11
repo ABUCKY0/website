@@ -6,7 +6,6 @@ import remarkCallout from "@r4ai/remark-callout";
 // import tailwind from '@astrojs/tailwind';
 import icon from "astro-icon";
 import sitemap from '@astrojs/sitemap';
-import cloudflare from '@astrojs/cloudflare';
 // https://astro.build/config
 export default defineConfig({
   fonts: [{
@@ -61,6 +60,5 @@ export default defineConfig({
   //   enabled: false
   // },
   site: 'https://abucky.dev',
-  output: 'server',
-  adapter: cloudflare()
+  output: 'static'
 });
