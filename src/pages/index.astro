@@ -4,8 +4,22 @@ import Footer from "../components/Footer.astro";
 import "@fontsource/work-sans";
 import "@fontsource/work-sans/700.css";
 import "../styles/global.css";
+import "../styles/homepage.css";
 import DiscordStatus from "../components/discordStatus.jsx";
 import DiscordCurrentActivities from "../components/discordCurrentActivities";
+import LastFmNowPlaying from "../components/LastFmNowPlaying.jsx";
+import { Font } from "astro:assets";
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+import { faGithub, faGitlab } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
+// 1. Register the icons so the library knows they exist
+library.add(faGithub, faGitlab, faEnvelope);
+
+// 2. Generate the static SVG code using 'fab' (Font Awesome Brands)
+const github = icon({ prefix: "fab", iconName: "github" });
+const gitlab = icon({ prefix: "fab", iconName: "gitlab" });
+const envelope = icon({ prefix: "fas", iconName: "envelope" });
 ---
 
 <html lang="en">
@@ -16,7 +30,14 @@ import DiscordCurrentActivities from "../components/discordCurrentActivities";
       type="image/png"
       href="https://avatars.githubusercontent.com/u/81783950"
     />
-    <meta name="viewport" content="width=device-width" />
+    <Font cssVariable="--font-open-sauce-sans" preload />
+    <Font cssVariable="--font-open-sans" preload />
+    <Font cssVariable="--font-archivo-black" preload />
+    <!-- <Font cssVariable="--font-agrandir-regular" preload /> -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <meta name="generator" content={Astro.generator} />
 
     <title>abucky.dev</title>
@@ -25,148 +46,123 @@ import DiscordCurrentActivities from "../components/discordCurrentActivities";
   <body>
     <Navigation currentPath={Astro.url.pathname} />
     <main class="main-content">
-      <h1 class="name">Hey, I'm Aaron!</h1>
+      <div class="intro-content">
+        <h1 class="name">Hey, I'm Aaron!</h1>
+        <p class="body-paragraph">
+          Student developer working on software, open source tools, and other
+          projects.
+        </p>
+        <div class="brief-links">
+          <a
+            href="https://github.com/ABUCKY0"
+            aria-label="GitHub"
+            class="brief-link-item"
+          >
+            <Fragment set:html={github.html.join("")} />
+          </a>
 
-      <a
-        href="https://discord.com/users/925248483135463454"
-        style="color: inherit; text-decoration: none;"
-      >
-        <div
-         class="aka-name"
-        >
-          <h2 class="disc-name">aka NotJohnnyTamale</h2> 
-          <DiscordStatus client:load />
-        </div>
-      </a>
+          <a
+            href="https://gitlab.com/abucky0"
+            aria-label="GitLab"
+            class="brief-link-item"
+          >
+            <Fragment set:html={gitlab.html.join("")} />
+          </a>
 
-      <div class="home-parent-container">
-        <div class="child home-left">
-          <p>I’m all of the following:</p>
-					<ul>
-						<li>Developer of random ass projects.</li>
-						<li>Sophomore Computer Science Student.</li>
-						<li>Former Vex Robotics student</li>
-						<li>Raspberry Pi Tinkerer</li>
-					</ul>
-          <!-- <p>
-            I’m a second-year college student with an interest in
-            Computer Science and Software Development. I’ve worked previously on
-            Raspberry Pi and Vex Robotics projects, as well as a wide range of
-            other software-only projects. This website is a testing ground and
-            showcase of the random ideas I have.
-          </p> -->
-        </div>
-
-        <div class="vertline"></div>
-
-        <div class="icon-flex-group child home-right">
-          <img
-            src="https://skillicons.dev/icons?i=astro&theme=dark"
-            alt="Astro"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=bash&theme=dark"
-            alt="Bash"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=blender&theme=dark"
-            alt="Blender"
-          />
-          <img src="https://skillicons.dev/icons?i=c&theme=dark" alt="C" />
-          <img src="https://skillicons.dev/icons?i=cpp&theme=dark" alt="C++" />
-          <img
-            src="https://skillicons.dev/icons?i=cloudflare&theme=dark"
-            alt="Cloudflare"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=deno&theme=dark"
-            alt="Deno"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=discordjs&theme=dark"
-            alt="Discord.js"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=docker&theme=dark"
-            alt="Docker"
-          />
-          <img src="https://skillicons.dev/icons?i=git&theme=dark" alt="Git" />
-          <img
-            src="https://skillicons.dev/icons?i=github&theme=dark"
-            alt="GitHub"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=githubactions&theme=dark"
-            alt="GitHub Actions"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=gradle&theme=dark"
-            alt="Gradle"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=html&theme=dark"
-            alt="HTML"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=java&theme=dark"
-            alt="Java"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=js&theme=dark"
-            alt="JavaScript"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=linux&theme=dark"
-            alt="Linux"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=netlify&theme=dark"
-            alt="Netlify"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=markdown&theme=dark"
-            alt="Markdown"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=netlify&theme=dark"
-            alt="Netlify"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=nodejs&theme=dark"
-            alt="NodeJS"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=ps&theme=dark"
-            alt="Photoshop"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=py&theme=dark"
-            alt="Python"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=raspberrypi&theme=dark"
-            alt="Raspberry Pi"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=replit&theme=dark"
-            alt="Replit"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=vercel&theme=dark"
-            alt="Vercel"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=vscode&theme=dark"
-            alt="VS Code"
-          />
-          <img
-            src="https://skillicons.dev/icons?i=windows&theme=dark"
-            alt="Windows"
-          />
+          <a
+            href="mailto:me@abucky.dev"
+            aria-label="Email"
+            class="brief-link-item"
+          >
+            <Fragment set:html={envelope.html.join("")} />
+          </a>
         </div>
       </div>
-      <DiscordCurrentActivities client:load />
+      <div class="now-playing-box">
+        <span class="section-divider"></span>
+        <LastFmNowPlaying client:load />
+      </div>
     </main>
-    <Footer />
+    <!-- 
+    <main class="homepage">
+      <section class="main-body">
+        <h1 class="name">Hey, I'm Aaron!</h1>
+        <p class="about-me">
+          I’m a second-year college student, with an interest in <span
+            class="emphasis-cs">Computer Science</span
+          > and <span class="emphasis-softwaredev">Software Development</span>.
+          I’ve worked previously on <span class="emphasis-rpi"
+            >Raspberry Pi</span
+          > and <span class="emphasis-vex">Vex Robotics</span> projects, as well as
+          a wide range of other software-only projects. This website is a testing
+          ground and showcase of the random ideas I have.
+        </p>
+      </section>
+
+      <aside class="projects-list">
+        <div class="projects-list-inner">
+          <div class="project-element project-element-1">
+            <div class="project-element-header">
+              <div>
+                <span class="project-element-featured-title"
+                  >Featured Project</span
+                >
+                <h2 class="project-element-name">Py-Now-Playing</h2>
+              </div>
+              <a
+                href="https://github.com/ABUCKY0"
+                class="project-element-gh-icon"
+              >
+                <img src="/github.svg" alt="GitHub" width="28" height="28" />
+              </a>
+            </div>
+            <p class="project-element-body">
+              A Python Library to pull the currently playing media from Windows
+              GSMTC
+            </p>
+          </div>
+          <a class="project-view-all" href="/projects">View All Projects</a>
+        </div>
+      </aside>
+
+      <section class="secondary-main-body">
+        <DiscordCurrentActivities client:load />
+        <div class="skills-box">
+          <span class="skills-title">Skills</span>
+          <div class="skills-content">
+            <img
+              src="https://skillicons.dev/icons?i=astro&theme=dark"
+              alt="Astro"
+            />
+            <img src="https://skillicons.dev/icons?i=c&theme=dark" alt="C" />
+            <img
+              src="https://skillicons.dev/icons?i=cpp&theme=dark"
+              alt="C++"
+            />
+            <img
+              src="https://skillicons.dev/icons?i=docker&theme=dark"
+              alt="Docker"
+            />
+            <img
+              src="https://skillicons.dev/icons?i=github&theme=dark"
+              alt="GitHub"
+            />
+            <img
+              src="https://skillicons.dev/icons?i=java&theme=dark"
+              alt="Java"
+            />
+            <img
+              src="https://skillicons.dev/icons?i=js&theme=dark"
+              alt="JavaScript"
+            />
+            <img
+              src="https://skillicons.dev/icons?i=py&theme=dark"
+              alt="Python"
+            />
+          </div>
+        </div>
+      </section>
+    </main> -->
+    <Footer client:load/>
   </body>
 </html>

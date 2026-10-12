@@ -1,11 +1,12 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-// import "../styles/global.css";
+import "../styles/global.css";
 import "../styles/projects.css";
 import "@fontsource/work-sans";
 import "@fontsource/work-sans/700.css";
 import { marked } from "marked";
+import { Font } from "astro:assets";
 
 type ProjectModule = {
   frontmatter: {
@@ -66,47 +67,13 @@ projects.sort((a, b) => {
       type="image/png"
       href="https://avatars.githubusercontent.com/u/81783950"
     />
-
+    <Font cssVariable="--font-open-sauce-sans" preload />
+    <Font cssVariable="--font-open-sans" preload />
+    <Font cssVariable="--font-archivo-black" preload />
     <title>Projects</title>
 
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <script>
-      function setActiveProject() {
-        const projects = document.querySelectorAll(".project");
-        let minDist = Infinity;
-        let activeProject = null;
-        const viewportCenter = window.innerHeight / 2;
-
-        projects.forEach((project) => {
-          const rect = project.getBoundingClientRect();
-          const projectCenter = rect.top + rect.height / 2;
-          const dist = Math.abs(projectCenter - viewportCenter);
-
-          if (dist < minDist) {
-            minDist = dist;
-            activeProject = project;
-          }
-        });
-
-        projects.forEach((project) => project.classList.remove("active"));
-
-        if (activeProject) {
-          activeProject.classList.add("active");
-        }
-      }
-
-      if (window.innerWidth <= 700) {
-        window.addEventListener("scroll", setActiveProject, {
-          passive: true,
-        });
-
-        window.addEventListener("resize", setActiveProject);
-        window.addEventListener("DOMContentLoaded", setActiveProject);
-
-        setActiveProject();
-      }
-    </script>
   </head>
 
   <body>
@@ -122,16 +89,19 @@ projects.sort((a, b) => {
               class="project"
               onclick={`window.location.href='${project.frontmatter.link}'`}
             >
-              {/* <a href={project.frontmatter.link} class="project-card-link" ></a> */}
-
-              <div class="project-body">
-                <h1 class="project-title">{project.frontmatter.title}</h1>
+              <div class="project-meta">
+                <span class="project-date">
+                  {project.frontmatter.start_year === project.frontmatter.end_year
+                    ? project.frontmatter.start_year
+                    : `${project.frontmatter.start_year} - ${project.frontmatter.end_year}`}
+                </span>
 
                 <div class="project-icons">
                   {project.frontmatter.github && (
                     <a
                       class="devicon-github-original project-gh-icon"
                       href={project.frontmatter.github}
+                      aria-label={`${project.frontmatter.title} on GitHub`}
                     />
                   )}
 
@@ -139,6 +109,12 @@ projects.sort((a, b) => {
                     <i class={`devicon-${icon}-plain`} />
                   ))}
                 </div>
+              </div>
+
+              {/* <a href={project.frontmatter.link} class="project-card-link" ></a> */}
+
+              <div class="project-body">
+                <h1 class="project-title">{project.frontmatter.title}</h1>
 
                 <p
                   class="project-description"
@@ -146,11 +122,6 @@ projects.sort((a, b) => {
                 />
               </div>
 
-              <span class="project-date">
-                {project.frontmatter.start_year === project.frontmatter.end_year
-                  ? project.frontmatter.start_year
-                  : `${project.frontmatter.start_year} - ${project.frontmatter.end_year}`}
-              </span>
             </div>
           ))
         }

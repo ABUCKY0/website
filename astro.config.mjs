@@ -8,37 +8,43 @@ import icon from "astro-icon";
 import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
-  fonts: [{
-    provider: fontProviders.local(),
-    name: "Glacial Indifference",
-    cssVariable: "--font-glacial-indifference",
-    options: {
-      variants: [{
-        src: ['./public/fonts/glacial-indifference.regular.otf'],
-        weight: 'normal',
-        style: 'normal'
-      },
-      {
-        src: ['./public/fonts/GlacialIndifference-Bold.ttf'],
-        weight: 'bold',
-        style: 'normal'
-      },
-      ]
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: "Open Sauce Sans",
+      cssVariable: "--font-open-sauce-sans",
+      options: {
+        variants: [{
+          src: ['./public/fonts/OpenSauceSans-Bold.ttf'],
+          weight: 'bold',
+          style: 'normal'
+        }]
+      }
+    },
+    {
+      provider: fontProviders.local(),
+      name: "Archivo Black",
+      cssVariable: "--font-archivo-black",
+      options: {
+        variants: [{
+          src: ['./public/fonts/ArchivoBlack-Regular.ttf'],
+          weight: '900',
+          style: 'normal'
+        }]
+      }
+    },
+    {
+      provider: fontProviders.local(),
+      name: "Open Sans",
+      cssVariable: "--font-open-sans",
+      options: {
+        variants: [{
+          src: ['./public/fonts/OpenSans-VariableFont_wdth,wght.ttf'],
+          weight: '300 800',
+          style: 'normal'
+        }]
+      }
     }
-  },
-  {
-    provider: fontProviders.local(),
-    name: "Agrandir Regular",
-    cssVariable: "--font-agrandir-regular",
-    options: {
-      variants: [{
-        src: ['./public/fonts/Agrandir-Regular.otf'],
-        weight: 'normal',
-        style: 'normal'
-      }]
-    }
-  }
-
   ],
 
   integrations: [react(), icon(),

@@ -5,9 +5,11 @@ import "@fontsource/work-sans";
 import "@fontsource/work-sans/700.css";
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
+import "../styles/404.css";
+import { Font } from "astro:assets";
 ---
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -18,6 +20,9 @@ import Footer from "../components/Footer.astro";
     />
     <title>404: {Astro.url.pathname} not found</title>
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <Font cssVariable="--font-open-sauce-sans" preload />
+    <Font cssVariable="--font-open-sans" preload />
+    <Font cssVariable="--font-archivo-black" preload />
     <script>
       window.addEventListener("DOMContentLoaded", () => {
         let random = Math.floor(Math.random() * 100);
@@ -32,7 +37,7 @@ import Footer from "../components/Footer.astro";
   </head>
   <body>
     <Navigation />
-    <div class="err-page">
+    <main class="err-page">
       <div id="teapot" style="display:none">
         <h1 class="errhone">418</h1>
         <h2>I'm a fuckin teapot &#129750;</h2>
@@ -58,7 +63,7 @@ import Footer from "../components/Footer.astro";
           });
         </script>
       </div>
-    </div>
+    </main>
     <Footer />
   </body>
 </html>

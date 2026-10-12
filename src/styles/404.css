@@ -1,0 +1,52 @@
+.err-page {
+  width: min(100% - 2rem, 75rem);
+  min-height: calc(100dvh - 2rem);
+  margin: 0 auto;
+  padding: 6rem 0 2rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#notfound,
+#teapot {
+  width: 100%;
+}
+
+.errhone {
+  margin: 0;
+  color: transparent;
+  font-family: var(--font-archivo-black);
+  font-size: clamp(6rem, 28vw, 12rem);
+  line-height: 0.9;
+  background: linear-gradient(61deg, #f6abdf, #bfa2f1, #fbd1a3, #81caf7);
+  background-clip: text;
+}
+
+#notfound-path,
+#teapot h2 {
+  margin: 1rem 0 0;
+  color: #aaa;
+  font-family: var(--font-open-sauce-sans);
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+
+#teapot iframe {
+  display: block;
+  width: min(100%, 35rem);
+  height: auto;
+  aspect-ratio: 16 / 9;
+  margin: 2rem auto 0;
+  border: 0;
+}
+
+@media (min-width: 701px) {
+  .err-page {
+    min-height: calc(100dvh - 4rem);
+    padding: 7rem 0 3rem;
+  }
+}

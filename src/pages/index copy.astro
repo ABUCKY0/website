@@ -7,7 +7,19 @@ import "../styles/rewrite-global.css";
 import "../styles/homepage.css";
 import DiscordStatus from "../components/discordStatus.jsx";
 import DiscordCurrentActivities from "../components/discordCurrentActivities";
+import LastFmNowPlaying from "../components/LastFmNowPlaying.jsx";
 import { Font } from "astro:assets";
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+import { faGithub, faGitlab } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
+// 1. Register the icons so the library knows they exist
+library.add(faGithub, faGitlab, faEnvelope);
+
+// 2. Generate the static SVG code using 'fab' (Font Awesome Brands)
+const github = icon({ prefix: "fab", iconName: "github" });
+const gitlab = icon({ prefix: "fab", iconName: "gitlab" });
+const envelope = icon({ prefix: "fas", iconName: "envelope" });
 ---
 
 <html lang="en">
@@ -18,8 +30,10 @@ import { Font } from "astro:assets";
       type="image/png"
       href="https://avatars.githubusercontent.com/u/81783950"
     />
-    <Font cssVariable="--font-glacial-indifference" preload />
-    <Font cssVariable="--font-agrandir-regular" preload />
+    <Font cssVariable="--font-open-sauce-sans" preload />
+    <Font cssVariable="--font-open-sans" preload />
+    <Font cssVariable="--font-archivo-black" preload />
+    <!-- <Font cssVariable="--font-agrandir-regular" preload /> -->
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
@@ -31,7 +45,45 @@ import { Font } from "astro:assets";
   </head>
   <body>
     <Navigation currentPath={Astro.url.pathname} />
+    <main class="main-content">
+      <div class="intro-content">
+        <h1 class="name">Hey, I'm Aaron!</h1>
+        <p class="body-paragraph">
+          Student developer working on software, open source tools, and other
+          projects.
+        </p>
+        <div class="brief-links">
+          <a
+            href="https://github.com/ABUCKY0"
+            aria-label="GitHub"
+            class="brief-link-item"
+          >
+            <Fragment set:html={github.html.join("")} />
+          </a>
 
+          <a
+            href="https://gitlab.com/abucky0"
+            aria-label="GitLab"
+            class="brief-link-item"
+          >
+            <Fragment set:html={gitlab.html.join("")} />
+          </a>
+
+          <a
+            href="mailto:me@abucky.dev"
+            aria-label="Email"
+            class="brief-link-item"
+          >
+            <Fragment set:html={envelope.html.join("")} />
+          </a>
+        </div>
+      </div>
+      <div class="now-playing-box">
+        <span class="section-divider"></span>
+        <LastFmNowPlaying client:load />
+      </div>
+    </main>
+    <!-- 
     <main class="homepage">
       <section class="main-body">
         <h1 class="name">Hey, I'm Aaron!</h1>
@@ -110,7 +162,7 @@ import { Font } from "astro:assets";
           </div>
         </div>
       </section>
-    </main>
+    </main> -->
     <!-- <Footer client:load/> -->
   </body>
 </html>

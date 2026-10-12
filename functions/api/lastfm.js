@@ -1,50 +1,35 @@
-const LASTFM_USERNAME = "ABUCKY0";
+// functions/api/lastfm.js
+import { getLastFmTrack } from "../../src/lib/lastfm.js";
 
-export async function onRequestGet({ env }) {
-  const apiKey = env.LASTFM_API_KEY;
+const CACHE_TTL_SECONDS = 15;
 
-  if (!apiKey) {
+export async function onRequestGet({ request, env }) {
+  const cache = caches.default;
+  const cacheKey = new Request(new URL("/api/lastfm", request.url), request);
+  const cachedResponse = await cache.match(cacheKey);
+
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  try {
+    const response = Response.json(
+      { track: await getLastFmTrack(env.LASTFM_API_KEY) },
+      {
+        headers: {
+          "Cache-Control": `public, max-age=${CACHE_TTL_SECONDS}, s-maxage=${CACHE_TTL_SECONDS}`,
+        },
+      }
+    );
+
+    await cache.put(cacheKey, response.clone());
+    return response;
+  } catch (error) {
+    console.error(error);
+
     return Response.json(
-      { error: "LASTFM_API_KEY is not configured" },
+      { error: error.message },
       { status: 500 }
     );
   }
-
-  const params = new URLSearchParams({
-    api_key: apiKey,
-    format: "json",
-    limit: "1",
-    method: "user.getrecenttracks",
-    user: LASTFM_USERNAME,
-  });
-
-  const response = await fetch(`https://ws.audioscrobbler.com/2.0/?${params}`);
-
-  if (!response.ok) {
-    return Response.json(
-      { error: "Last.fm returned an unsuccessful response" },
-      { status: 502 }
-    );
-  }
-
-  const data = await response.json();
-  const recentTrack = data.recenttracks?.track?.[0];
-
-  if (!recentTrack) {
-    return Response.json(
-      { track: null },
-      { headers: { "Cache-Control": "no-store" } }
-    );
-  }
-
-  return Response.json(
-    {
-      track: {
-        artist: recentTrack.artist?.["#text"] || "Unknown artist",
-        name: recentTrack.name || "Unknown track",
-        nowPlaying: recentTrack["@attr"]?.nowplaying === "true",
-      },
-    },
-    { headers: { "Cache-Control": "no-store" } }
-  );
 }

@@ -1,16 +1,20 @@
 ---
-const platform = "github";
-const username = "withastro";
-import Social from "./Social.astro";
-import DiscordCurrentActivities from "./discordCurrentActivitiesFooter.jsx";
+import "../styles/footer.css";
 ---
 
 <footer class="footer">
-  <!-- <Social platform="twitter" username="astrodotbuild" />
-  <Social platform="github" username="withastro" />
-  <Social platform="youtube" username="astrodotbuild" /> -->
   <div class="footer-inner">
-    <DiscordCurrentActivities client:load />
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/projects">Projects</a>
+      <a href="/blog">Blog</a>
+      <a href="/guestbook" hidden>Guestbook</a>
+      <a href="/colophon" hidden>Colophon</a>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© ABUCKY0 2026</span>
+      <a href="/">abucky.dev</a>
+    </div>
   </div>
-  <!-- if domain is localhost, show a Development message -->
 </footer>
