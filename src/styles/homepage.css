@@ -57,7 +57,7 @@
 .projects-list {
   background-image: linear-gradient(to bottom, #00000000 0rem, #00000070 7rem);
   /* height: 100vw; */
-  margin: -1rem -1rem;
+  margin: -1rem -1rem 0rem -1rem;
   padding: 4rem 1rem 3rem 1rem;
   width: auto;
   /* display: flex;
@@ -181,6 +181,8 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
+  filter: brightness(85%);
   
 }
 
