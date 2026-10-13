@@ -29,9 +29,9 @@
 #teapot h2 {
   margin: 1rem 0 0;
   color: #aaa;
-  font-family: var(--font-open-sauce-sans);
+  font-family: var(--font-open-sans);
   font-size: clamp(1rem, 3vw, 1.5rem);
-  font-weight: 400;
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 

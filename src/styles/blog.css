@@ -23,7 +23,7 @@
 .blog-title {
   margin: 0;
   color: #d9d9d9;
-  font-family: var(--font-open-sauce-sans);
+  font-family: var(--font-archivo-black);
   font-size: clamp(2rem, 8vw, 3.5rem);
   letter-spacing: -0.025em;
   line-height: 1.05;

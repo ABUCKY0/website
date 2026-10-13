@@ -6,9 +6,10 @@ body {
 }
 
 .main-content {
-  width: auto;
-  margin: 0 2.2rem;
-  padding: 5rem 0 2rem;
+  width: min(calc(100% - 2rem), 75rem);
+  margin: 0 auto;
+  padding: 5.25rem 0 2rem;
+  box-sizing: border-box;
 }
 
 .main-content > h1 {
@@ -115,9 +116,9 @@ body {
 
 @media (min-width: 701px) {
   .main-content {
-    width: min(100% - 4rem, 70rem);
+    width: min(calc(100% - 8rem), 76rem);
     margin: 0 auto;
-    padding: 5.25rem 0 3rem;
+    padding: 5.5rem 0 3rem;
   }
 
   .main-content > h1 {
