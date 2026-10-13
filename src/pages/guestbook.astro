@@ -1,4 +1,7 @@
 ---
+if (!import.meta.env.DEV) {
+  return Astro.rewrite("/404");
+}
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import "@fontsource/work-sans";
@@ -26,13 +29,10 @@ import { Font } from "astro:assets";
     <Font cssVariable="--font-archivo-black" preload />
     <title>abucky.dev</title>
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <script>window.location.href = "/404"</script>
   </head>
   <body>
     <Navigation currentPath={Astro.url.pathname} />
-    <main class="main-content">
-
-    </main>
+    <main class="main-content"></main>
     <Footer />
   </body>
 </html>
