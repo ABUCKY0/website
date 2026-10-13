@@ -53,9 +53,17 @@ body {
 
 .brief-links {
   display: flex;
-  justify-content: left;
+  justify-content: flex-start;
   margin: 0.5rem 0 0;
   gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .body-paragraph,
+  .brief-links {
+    width: calc(100% - 1rem);
+    margin-left: 1rem;
+  }
 }
 
 .brief-links svg {
@@ -184,6 +192,60 @@ body {
 
   .now-playing-box {
     margin: 0;
+  }
+
+  .now-playing-content {
+    min-height: 10rem;
+    padding: 1rem;
+  }
+
+  .now-playing-track {
+    min-height: 8rem;
+  }
+
+  .now-playing-art {
+    width: 7rem;
+    height: 7rem;
+    flex-basis: 7rem;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .main-content {
+    width: min(100% - 4rem, 42rem);
+    min-height: calc(100dvh - 4.5rem);
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 3.5rem;
+    padding: 6rem 0 3rem;
+    text-align: center;
+  }
+
+  .intro-content,
+  .now-playing-box {
+    max-width: none;
+    margin: 0;
+  }
+
+  .name {
+    font-size: clamp(4rem, 10vw, 6rem);
+    line-height: 0.98;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .body-paragraph {
+    max-width: 32rem;
+    margin: 1.5rem auto 0;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  .brief-links {
+    justify-content: center;
+    margin-top: 1.5rem;
   }
 
   .now-playing-content {
