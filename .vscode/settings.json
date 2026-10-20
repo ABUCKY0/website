@@ -1,6 +1,7 @@
 {
   "conventionalCommits.scopes": [
     "projects",
-    "nav"
+    "nav",
+    "lastfm function"
   ]
 }

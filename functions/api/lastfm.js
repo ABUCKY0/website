@@ -6,10 +6,13 @@ const CACHE_TTL_SECONDS = 15;
 export async function onRequestGet({ request, env }) {
   const cache = caches.default;
   const cacheKey = new Request(new URL("/api/lastfm", request.url), request);
-  const cachedResponse = await cache.match(cacheKey);
-
-  if (cachedResponse) {
-    return cachedResponse;
+  try {
+    const cachedResponse = await cache.match(cacheKey);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+  } catch (error) {
+    console.warn("Last.fm cache read failed:", error);
   }
 
   try {
@@ -22,7 +25,11 @@ export async function onRequestGet({ request, env }) {
       }
     );
 
-    await cache.put(cacheKey, response.clone());
+    try {
+      await cache.put(cacheKey, response.clone());
+    } catch (error) {
+      console.warn("Last.fm cache write failed:", error);
+    }
     return response;
   } catch (error) {
     console.error(error);
