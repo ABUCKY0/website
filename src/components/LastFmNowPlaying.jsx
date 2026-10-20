@@ -24,7 +24,7 @@ export default function LastFmNowPlaying() {
     };
 
     loadTrack();
-    const interval = setInterval(loadTrack, 30_000);
+    const interval = setInterval(loadTrack, 15_000);
 
     return () => {
       cancelled = true;
