@@ -73,7 +73,6 @@ projects.sort((a, b) => {
     <title>Projects</title>
 
     <link rel="sitemap" href="/sitemap-index.xml" />
-
   </head>
 
   <body>
@@ -87,27 +86,29 @@ projects.sort((a, b) => {
           projects.map((project) => (
             <div
               class="project"
-              onclick={`window.location.href='${project.frontmatter.link}'`}
+              onclick={`window.location.href='${project.frontmatter.link || "https://abucky.dev/projects"}'`}
             >
               <div class="project-meta">
                 <span class="project-date">
-                  {project.frontmatter.start_year === project.frontmatter.end_year
+                  {project.frontmatter.start_year ===
+                  project.frontmatter.end_year
                     ? project.frontmatter.start_year
                     : `${project.frontmatter.start_year} - ${project.frontmatter.end_year}`}
                 </span>
 
                 <div class="project-icons">
+                  {project.frontmatter.devicons?.map((icon) => (
+                    <i class={`devicon-${icon}-plain`} />
+                  ))}
                   {project.frontmatter.github && (
+                    
+                  <span class="project-vertical-seperator"/>
                     <a
                       class="devicon-github-original project-gh-icon"
                       href={project.frontmatter.github}
                       aria-label={`${project.frontmatter.title} on GitHub`}
                     />
                   )}
-
-                  {project.frontmatter.devicons?.map((icon) => (
-                    <i class={`devicon-${icon}-plain`} />
-                  ))}
                 </div>
               </div>
 
@@ -121,7 +122,6 @@ projects.sort((a, b) => {
                   set:html={project.descriptionHtml}
                 />
               </div>
-
             </div>
           ))
         }
