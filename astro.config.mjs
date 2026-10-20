@@ -1,11 +1,13 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 import react from '@astrojs/react';
+import cloudflare from '@astrojs/cloudflare';
 import { unified } from '@astrojs/markdown-remark';
 import remarkCallout from "@r4ai/remark-callout";
 // import tailwind from '@astrojs/tailwind';
 import icon from "astro-icon";
 import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   fonts: [
@@ -66,5 +68,6 @@ export default defineConfig({
   //   enabled: false
   // },
   site: 'https://abucky.dev',
-  output: 'static'
+  output: 'server',
+  adapter: cloudflare()
 });

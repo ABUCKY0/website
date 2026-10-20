@@ -2,7 +2,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { getLastFmTrack } from "../../lib/lastfm.js";
-import cloudflare from '@astrojs/cloudflare';
 
 function getDevVar(name) {
   const varsPath = fileURLToPath(new URL("../../../.dev.vars", import.meta.url));
