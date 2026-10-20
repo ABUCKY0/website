@@ -2,6 +2,24 @@
 // import github-mark-white.svg from public/github-mark-white.svg
 import "../styles/global.css";
 import "../styles/nav.css";
+import {
+  faGithub,
+  faGitlab,
+  faDiscord,
+  faXTwitter,
+  faMatrix,
+} from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+
+const socialIcons = {
+  github: icon(faGithub).html.join(""),
+  gitlab: icon(faGitlab).html.join(""),
+  email: icon(faEnvelope).html.join(""),
+  discord: icon(faDiscord).html.join(""),
+  twitter: icon(faXTwitter).html.join(""),
+  matrix: icon(faMatrix).html.join(""),
+};
 ---
 
 <div class="nav">
@@ -27,8 +45,11 @@ import "../styles/nav.css";
     </summary>
     <div class="nav-link-dropdown">
       <a href="https://github.com/ABUCKY0">GitHub</a>
-      <a href="https://gitlab.com/abucky0">GitLab</a>
       <a href="mailto:me@abucky.dev">Email</a>
+      <a href="https://matrix.to/#/@notjohnnytamale:matrix.org">Matrix</a>
+      <a href="https://discord.com/users/925248483135463454">Discord</a>
+      <a href="https://x.com/@abucky0">Twitter</a>
+      <a href="https://gitlab.com/abucky0">GitLab</a>
     </div>
   </details>
 
@@ -48,6 +69,36 @@ import "../styles/nav.css";
     <a href="/about-me" hidden>About Me</a>
     <a href="/guestbook" hidden>Guestbook</a>
     <a href="/colophon">Colophon</a>
+
+    <div class="nav-link-list">
+      <a href="https://github.com/ABUCKY0" aria-label="GitHub">
+        <Fragment set:html={socialIcons.github} />
+      </a>
+
+      <a href="mailto:me@abucky.dev" aria-label="Email">
+        <Fragment set:html={socialIcons.email} />
+      </a>
+      <a
+        href="https://matrix.to/#/@notjohnnytamale:matrix.org"
+        aria-label="Matrix"
+      >
+        <Fragment set:html={socialIcons.matrix} />
+      </a>
+      <a
+        href="https://discord.com/users/925248483135463454"
+        aria-label="Discord"
+      >
+        <Fragment set:html={socialIcons.discord} />
+      </a>
+
+      <a href="https://x.com/abucky0" aria-label="X">
+        <Fragment set:html={socialIcons.twitter} />
+      </a>
+
+      <a href="https://gitlab.com/abucky0" aria-label="GitLab">
+        <Fragment set:html={socialIcons.gitlab} />
+      </a>
+    </div>
   </nav>
 
   <!-- <div class="nav-socials">
@@ -59,5 +110,6 @@ import "../styles/nav.css";
       <a href="https://github.com/ABUCKY0">
         <img src="/github.svg" alt="GitHub" width="28" height="28" />
       </a>
-    </a> -->
+    </a>
+    </div> -->
 </div>

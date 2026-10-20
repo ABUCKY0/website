@@ -149,6 +149,7 @@
   pointer-events: auto;
   transform: translateY(0);
 }
+
 .nav-popup a {
   color: inherit;
   text-decoration: none;
@@ -161,6 +162,44 @@
   margin: 1rem auto 0;
   background: #aaa;
 }
+
+.nav-link-list {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.nav-link-list a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-color: #00000000;
+  margin-top: -1rem;
+  text-decoration: none;
+  color: #d3d3d3;
+  margin-bottom: 0;
+
+}
+
+.nav-link-list svg {
+  width: 10rem;
+  height: 10rem;
+}
+
+.nav-link-list a::after {
+  display: none;
+}
+
+.nav-link-list a::after {
+  display: none;
+}
+
+
+
 
 @media (min-width: 701px) {
   .nav {
