@@ -1,28 +1,107 @@
 ---
 // import github-mark-white.svg from public/github-mark-white.svg
 import "../styles/global.css";
-import "@fontsource/work-sans";
-import "@fontsource/work-sans/700.css";
+import "../styles/nav.css";
+import {
+  faGithub,
+  faGitlab,
+  faDiscord,
+  faXTwitter,
+  faMatrix,
+} from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+
+const socialIcons = {
+  github: icon(faGithub).html.join(""),
+  gitlab: icon(faGitlab).html.join(""),
+  email: icon(faEnvelope).html.join(""),
+  discord: icon(faDiscord).html.join(""),
+  twitter: icon(faXTwitter).html.join(""),
+  matrix: icon(faMatrix).html.join(""),
+};
 ---
 
 <div class="nav">
-  <div class="nav-links">
-    <a href="/" class={Astro.url.pathname === "/" ? "active" : ""}>Home</a>
-    <!-- <a href="" class={currentPath === "/about" ? "active" : ""}>About</a> -->
-    <a
-      href="/projects"
-      class={Astro.url.pathname.startsWith("/projects") ? "active" : ""}>Projects</a
-    >
-    <a
-      href="/blog"
-      class={Astro.url.pathname.startsWith("/blog") ||
-      Astro.url.pathname.startsWith("/posts")
-        ? "active"
-        : ""}>Blog</a
-    >
+  <a href="/"><span class="logo">ab</span></a>
+
+  <nav class="nav-desktop-links" aria-label="Primary navigation">
+    <a href="/">Home</a>
+    <a href="/projects">Projects</a>
+    <a href="/blog">Blog</a>
+    <a href="/about-me" hidden>About Me</a>
+    <a href="/guestbook" hidden>Guestbook</a>
+    <a href="/colophon">Colophon</a>
+  </nav>
+
+  <details class="nav-link-menu">
+    <summary aria-label="Open links menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M10 13a5 5 0 0 0 7.07.07l2-2a5 5 0 0 0-7.07-7.07l-1.15 1.15"
+        ></path>
+        <path d="M14 11a5 5 0 0 0-7.07-.07l-2 2A5 5 0 0 0 7 20l1.15-1.15"
+        ></path>
+      </svg>
+    </summary>
+    <div class="nav-link-dropdown">
+      <a href="https://github.com/ABUCKY0">GitHub</a>
+      <a href="mailto:me@abucky.dev">Email</a>
+      <a href="https://matrix.to/#/@notjohnnytamale:matrix.org">Matrix</a>
+      <a href="https://discord.com/users/925248483135463454">Discord</a>
+      <a href="https://x.com/@abucky0">Twitter</a>
+      <a href="https://gitlab.com/abucky0">GitLab</a>
+    </div>
+  </details>
+
+  <div class="hamburger-control">
+    <input class="hamburger-toggle" type="checkbox" id="hamburger-toggle" />
+    <label class="hamburger" for="hamburger-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
   </div>
 
-  <div class="nav-socials">
+  <nav class="nav-popup">
+    <a href="/">Home</a>
+    <a href="/projects">Projects</a>
+    <a href="/blog">Blog</a>
+    <a href="/about-me" hidden>About Me</a>
+    <a href="/guestbook" hidden>Guestbook</a>
+    <a href="/colophon">Colophon</a>
+
+    <div class="nav-link-list">
+      <a href="https://github.com/ABUCKY0" aria-label="GitHub">
+        <Fragment set:html={socialIcons.github} />
+      </a>
+
+      <a href="mailto:me@abucky.dev" aria-label="Email">
+        <Fragment set:html={socialIcons.email} />
+      </a>
+      <a
+        href="https://matrix.to/#/@notjohnnytamale:matrix.org"
+        aria-label="Matrix"
+      >
+        <Fragment set:html={socialIcons.matrix} />
+      </a>
+      <a
+        href="https://discord.com/users/925248483135463454"
+        aria-label="Discord"
+      >
+        <Fragment set:html={socialIcons.discord} />
+      </a>
+
+      <a href="https://x.com/abucky0" aria-label="X">
+        <Fragment set:html={socialIcons.twitter} />
+      </a>
+
+      <a href="https://gitlab.com/abucky0" aria-label="GitLab">
+        <Fragment set:html={socialIcons.gitlab} />
+      </a>
+    </div>
+  </nav>
+
+  <!-- <div class="nav-socials">
     <a href="https://discord.com/users/925248483135463454">
       <img src="/discord.svg" alt="Discord" width="32" height="32" />
     </a>
@@ -32,5 +111,5 @@ import "@fontsource/work-sans/700.css";
         <img src="/github.svg" alt="GitHub" width="28" height="28" />
       </a>
     </a>
-  </div>
+    </div> -->
 </div>

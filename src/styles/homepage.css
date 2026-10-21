@@ -1,0 +1,265 @@
+
+
+body {
+  margin: 0;
+}
+.main-content {
+  width: min(100% - 2rem, 75rem);
+  min-height: 100dvh;
+  margin-inline: auto;
+  padding: 5rem 0 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.intro-content {
+  width: 100%;
+  max-width: 42rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.name,
+.body-paragraph,
+.brief-links {
+  width: 100%;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-archivo-black);
+  font-size: 11vw;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: transparent;
+  background: linear-gradient(61deg, #f6abdf, #bfa2f1, #fbd1a3, #81caf7);
+  background-clip: text;
+}
+
+.now-playing-box {
+  width: 100%;
+  max-width: 42rem;
+  margin: 0;
+}
+
+.body-paragraph {
+  margin: 0.5rem 0 0;
+  text-align: left;
+}
+
+.brief-links {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.5rem 0 0;
+  gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .body-paragraph,
+  .brief-links {
+    width: calc(100% - 1rem);
+    margin-left: 1rem;
+  }
+}
+
+.brief-links svg {
+  width: 2rem;
+  height: 2rem;
+  color: #d9d9d9;
+}
+
+.brief-link-item:hover svg {
+  color: #b4b4b4;
+}
+
+.section-divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  background: #aaa;
+}
+
+.now-playing-label {
+  margin: 0.45rem 0 0.35rem;
+  color: #bdbdbd;
+  font-size: 0.75rem;
+  line-height: 1;
+  text-align: left;
+}
+
+.now-playing-content {
+  width: 100%;
+  min-height: 8rem;
+  border: 1px solid #777;
+  border-radius: 0.5rem;
+  background: #5b5b5b;
+  box-sizing: border-box;
+  padding: 0.75rem;
+}
+
+.now-playing-track {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 6.5rem;
+  text-align: left;
+}
+
+.now-playing-art {
+  width: 6rem;
+  height: 6rem;
+  flex: 0 0 6rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.now-playing-details {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.now-playing-title,
+.now-playing-artist,
+.now-playing-album {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.now-playing-title {
+  color: #fff;
+}
+
+.now-playing-artist {
+  color: #eee;
+}
+
+.now-playing-album,
+.now-playing-empty {
+  color: #c5c5c5;
+  font-size: 0.8rem;
+}
+
+.now-playing-empty {
+  margin: 0;
+}
+
+@media (min-width: 701px) {
+  .main-content {
+    width: min(100% - 8rem, 76rem);
+    min-height: calc(100dvh - 4.5rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 28rem);
+    align-content: center;
+    align-items: center;
+    gap: clamp(3rem, 8vw, 9rem);
+    padding: 4.5rem 0 3rem;
+    text-align: left;
+  }
+
+  .intro-content,
+  .now-playing-box {
+    max-width: none;
+  }
+
+  .intro-content {
+    margin: 0;
+  }
+
+  .name {
+    font-size: clamp(4rem, 7vw, 7rem);
+    line-height: 0.98;
+    white-space: normal;
+  }
+
+  .body-paragraph {
+    max-width: 32rem;
+    margin-top: 1.5rem;
+    font-size: 1.15rem;
+    line-height: 1.5;
+  }
+
+  .brief-links {
+    margin-top: 1.5rem;
+  }
+
+  .now-playing-box {
+    margin: 0;
+  }
+
+  .now-playing-content {
+    min-height: 10rem;
+    padding: 1rem;
+  }
+
+  .now-playing-track {
+    min-height: 8rem;
+  }
+
+  .now-playing-art {
+    width: 7rem;
+    height: 7rem;
+    flex-basis: 7rem;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .main-content {
+    width: min(100% - 4rem, 42rem);
+    min-height: calc(100dvh - 4.5rem);
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 3.5rem;
+    padding: 6rem 0 3rem;
+    text-align: center;
+  }
+
+  .intro-content,
+  .now-playing-box {
+    max-width: none;
+    margin: 0;
+  }
+
+  .name {
+    font-size: clamp(4rem, 10vw, 6rem);
+    line-height: 0.98;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .body-paragraph {
+    max-width: 32rem;
+    margin: 1.5rem auto 0;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  .brief-links {
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .now-playing-content {
+    min-height: 10rem;
+    padding: 1rem;
+  }
+
+  .now-playing-track {
+    min-height: 8rem;
+  }
+
+  .now-playing-art {
+    width: 7rem;
+    height: 7rem;
+    flex-basis: 7rem;
+  }
+}

@@ -1,0 +1,89 @@
+---
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import "@fontsource/work-sans";
+import "@fontsource/work-sans/700.css";
+import "../styles/global.css";
+import "../styles/colophon.css";
+import { Font } from "astro:assets";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://avatars.githubusercontent.com/u/81783950"
+    />
+    <Font cssVariable="--font-open-sauce-sans" preload />
+    <Font cssVariable="--font-open-sans" preload />
+    <Font cssVariable="--font-archivo-black" preload />
+    <title>abucky.dev</title>
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <Navigation currentPath={Astro.url.pathname} />
+    <main class="main-content">
+      <h1>Colophon</h1>
+      <h2>01. About This Site</h2>
+      <p>
+        This website was built in the summer of 2025 as a random weekday project
+        since I had nothing to do between graduating high school and starting
+        college. It started as just a blog, homepage, and about me template
+        website in Astro.<br /><br />
+
+        The website has gone through three different design iterations. The
+        first was a relatively basic white-on-black website. Because it was only
+        my second full website, it was more focused on just making it unique
+        than actually visually interesting. <br /><br />
+
+        The second iteration went in a similar direction, but had a
+        black-grey-black linear gradient with a grid on top, and a fade to
+        darker black under the main content. I didn't end up finishing the
+        implementation of this one because I started having issues with how to
+        organize the homepage to where everything felt like it flowed properly.<br
+        /><br />
+
+        The third iteration went back to a similar idea to the first design, but
+        with a more complimentary dark-gray background and very light-gray text.
+        I kept the background as a solid color to make organization easier, and
+        decided to keep the homepage simple without trying to fit a bunch of
+        random stuff on it.
+      </p>
+      <h2>02. Built With</h2>
+      <p>
+        This website was built with Astro, React Components, and raw CSS. I
+        don't remember the exact reason for choosing Astro, but if I recall
+        correctly I googled best website frameworks or something similar and
+        Astro kept being recommended. I <em>heavily</em> recommend Astro for personal
+        sites, it's super easy to setup and use. Most of the website is static content,
+        except for the now playing box on the homepage or the Guestbook (soon™).<br
+        /><br />
+
+        The website is hosted on Cloudflare Pages, and the backend apis are
+        hosted on Cloudflare Functions (such as the Last.fm api wrapper or the
+        (soon™ to be implemented) Guestbook).
+      </p>
+      <h2>03. Design</h2>
+      <p>
+        The current design of this website was built in Canva, and I
+        experimented with different layouts before implementing what I designed
+        in Astro and CSS. I settled on a Dark Gray (#424242) background and
+        Light Gray (#d9d9d9) for text. All body text and headers use Open Sans,
+        titles of pages use Archivo Black, and the logo uses Open Sauce Sans.
+      </p>
+      <h2>04. Credits</h2>
+      <p>
+        Fonts: Open Sans, Open Sauce, & Archivo Black <br />
+        Icons: Font Awesome, SVG Repo, & Devicons.
+      </p>
+    </main>
+    <Footer />
+  </body>
+</html>

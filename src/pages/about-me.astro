@@ -1,0 +1,64 @@
+---
+if (!import.meta.env.DEV) {
+  return Astro.rewrite("/404");
+}
+
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import "@fontsource/work-sans";
+import "@fontsource/work-sans/700.css";
+import "../styles/global.css";
+import "../styles/colophon.css";
+import { Font } from "astro:assets";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://avatars.githubusercontent.com/u/81783950"
+    />
+    <Font cssVariable="--font-open-sauce-sans" preload />
+    <Font cssVariable="--font-open-sans" preload />
+    <Font cssVariable="--font-archivo-black" preload />
+    <title>About Me | abucky.dev</title>
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <Navigation currentPath={Astro.url.pathname} />
+    <main class="main-content">
+      <h1>About Me</h1>
+      <p>
+        Hey, I’m Aaron! I’m a 19-year-old college student and developer working
+        towards a bachelor’s in Computer Science. I’ve been interested in
+        programming since 3rd grade, when I joined a club where we learned to
+        use Scratch and Alice.
+      </p>
+      <p>
+        Throughout middle school, I tinkered with Python and a Freenove
+        Raspberry Pi kit, building and making minor changes to the included
+        scripts, but nothing major. The biggest jump came in 9th grade, when I
+        started one of four years of CS classes.
+      </p>
+      <h2>Programming</h2>
+      <p>
+        I’ve worked on a variety of projects, including Discord bots, Python
+        libraries, Minecraft Java mods, PowerShell scripts, and hosting
+        miscellaneous services on a Pi and on a VPS.
+      </p>
+      <p>
+        I was also on my high school’s robotics team throughout 11th and 12th
+        grade. I primarily did programming, though I did a lot of the building
+        tasks in 11th grade as well.
+      </p>
+    </main>
+    <Footer />
+  </body>
+</html>

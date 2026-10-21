@@ -2,9 +2,11 @@
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+import "../styles/blogList.css";
 import "@fontsource/work-sans";
 import "@fontsource/work-sans/700.css";
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+import { Font } from "astro:assets";
 
 type PostModule = {
   frontmatter: {
@@ -18,7 +20,7 @@ type PostModule = {
   };
   Content: ReturnType<AstroComponentFactory>;
 };
-
+ 
 const postImport = import.meta.glob("./posts/content/*.md");
 
 const posts = await Promise.all(
@@ -58,6 +60,9 @@ const filteredPosts = posts.filter(
     />
     <title>Blog</title>
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <Font cssVariable="--font-open-sauce-sans" preload />
+    <Font cssVariable="--font-open-sans" preload />
+    <Font cssVariable="--font-archivo-black" preload />
   </head>
   <body>
     <Navigation currentPath={Astro.url.pathname} />
@@ -84,7 +89,7 @@ const filteredPosts = posts.filter(
                     )}
                   </span>
                 )}
-                <hr>
+                <hr />
                 <h2 class="post-li-title">{filename.frontmatter.title}</h2>
                 {filename.frontmatter.banner && (
                   <img
@@ -93,7 +98,7 @@ const filteredPosts = posts.filter(
                     class="blog-li-banner"
                   />
                 )}
-                <hr>
+                <hr />
                 <div class="post-li-content">
                   {filename.frontmatter.description && (
                     <p class="post-li-description">

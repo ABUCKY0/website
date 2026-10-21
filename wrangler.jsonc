@@ -1,8 +1,19 @@
 {
   "name": "my-astro-app",
-  // Update to today's date
-  "compatibility_date": "2025-03-25",
+  "compatibility_date": "2026-01-01",
   "assets": {
     "directory": "./dist"
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "dev",
+      "database_name": "development-abucky-dev-guestbook",
+      "database_id": "5ea6b4f6-f404-49bf-975f-d7585f5c322c"
+    },
+    {
+      "binding": "prod",
+      "database_name": "abucky-dev-guestbook",
+      "database_id": "0181a3dc-0ae3-4c1a-b902-d8168efd492c"
+    }
+  ]
 }

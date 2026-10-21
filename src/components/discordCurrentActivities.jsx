@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useLanyard } from "use-lanyard";
 import styles from "../styles/discordCurrentActivities.module.css";
 
+const DISCORD_ID = "925248483135463454";
+
 export default function DiscordCurrentActivities() {
-  const [activities, setActivities] = useState([]);
+  const presence = useLanyard(DISCORD_ID);
   const [now, setNow] = useState(Date.now()); // ticking clock
 
-  // Tick every second (no flicker)
   useEffect(() => {
     const interval = setInterval(() => {
       setNow(Date.now());
@@ -13,85 +15,7 @@ export default function DiscordCurrentActivities() {
     return () => clearInterval(interval);
   }, []);
 
-  // Lanyard WebSocket
-  useEffect(() => {
-    let ws;
-    let heartbeat;
-    let reconnectTimeout;
-
-    const connect = () => {
-      ws = new WebSocket("wss://api.lanyard.rest/socket");
-
-      ws.onopen = () => {
-        console.log("Connected to Lanyard");
-      };
-
-      ws.onmessage = (event) => {
-        const msg = JSON.parse(event.data);
-
-        // HELLO (op 1)
-        if (msg.op === 1) {
-          const interval = msg.d.heartbeat_interval;
-
-          clearInterval(heartbeat);
-          heartbeat = setInterval(() => {
-            ws.send(JSON.stringify({ op: 3 }));
-          }, interval);
-
-          // Subscribe AFTER HELLO
-          ws.send(
-            JSON.stringify({
-              op: 2,
-              d: { subscribe_to_id: "925248483135463454" }
-            })
-          );
-        }
-
-        // HEARTBEAT ACK (op 3)
-        if (msg.op === 3) {
-          // optional
-        }
-
-        // RECONNECT (op 4)
-        if (msg.op === 4) {
-          console.log("Lanyard requested reconnect");
-          ws.close();
-          return;
-        }
-
-        // INIT_STATE or PRESENCE_UPDATE
-        if (msg.t === "INIT_STATE" || msg.t === "PRESENCE_UPDATE") {
-          if (msg.d?.activities) {
-            setActivities(msg.d.activities);
-          }
-        }
-      };
-
-      ws.onclose = () => {
-        console.log("Disconnected from Lanyard, retrying...");
-        clearInterval(heartbeat);
-
-        reconnectTimeout = setTimeout(() => {
-          connect();
-        }, 1000);
-      };
-
-      ws.onerror = () => {
-        ws.close();
-      };
-    };
-
-    connect();
-
-    return () => {
-      clearInterval(heartbeat);
-      clearTimeout(reconnectTimeout);
-      ws?.close();
-    };
-  }, []);
-
-
-
+  const activities = presence?.activities ?? [];
   if (!activities.length) return null;
 
   // Activity verb
@@ -118,6 +42,7 @@ export default function DiscordCurrentActivities() {
     }
 
     if (activity.name === "Amazon Music") iconName = "amazon-music";
+    if (activity.name === "Spotify") iconName = "spotify";
     if (activity.name === "Visual Studio Code") iconName = "vscode";
 
     return (

@@ -1,0 +1,38 @@
+---
+if (!import.meta.env.DEV) {
+  return Astro.rewrite("/404");
+}
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import "@fontsource/work-sans";
+import "@fontsource/work-sans/700.css";
+import "../styles/global.css";
+import "../styles/guestbook.css";
+import { Font } from "astro:assets";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://avatars.githubusercontent.com/u/81783950"
+    />
+    <Font cssVariable="--font-open-sauce-sans" preload />
+    <Font cssVariable="--font-open-sans" preload />
+    <Font cssVariable="--font-archivo-black" preload />
+    <title>abucky.dev</title>
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <Navigation currentPath={Astro.url.pathname} />
+    <main class="main-content"></main>
+    <Footer />
+  </body>
+</html>

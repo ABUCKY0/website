@@ -45,3 +45,12 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Last.fm footer activity
+
+The footer reads the latest track for the `ABUCKY0` Last.fm account through
+`/api/lastfm`. Configure the API key as a Cloudflare secret:
+
+```sh
+wrangler secret put LASTFM_API_KEY
+```

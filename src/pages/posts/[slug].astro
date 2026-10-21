@@ -6,6 +6,7 @@ import "../../styles/blog.css";
 import "@fontsource/work-sans";
 import "@fontsource/work-sans/700.css";
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+import { Font } from "astro:assets";
 
 type PostModule = {
   frontmatter: {
@@ -57,6 +58,9 @@ const PostContent = post!.Content;
       type="image/png"
       href="https://avatars.githubusercontent.com/u/81783950"
     />
+    <Font cssVariable="--font-open-sauce-sans" preload />
+    <Font cssVariable="--font-open-sans" preload />
+    <Font cssVariable="--font-archivo-black" preload />
 
     {
       post!.frontmatter.tags && (
