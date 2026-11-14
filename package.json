@@ -24,7 +24,7 @@
     "@fortawesome/free-brands-svg-icons": "^7.3.1",
     "@fortawesome/free-solid-svg-icons": "^7.3.1",
     "@r4ai/remark-callout": "^0.6.2",
-    "astro": "^7.4.1",
+    "astro": "^7.4.12",
     "astro-icon": "^1.1.5",
     "marked": "^15.0.12",
     "sanitize-html": "^2.18.1",
